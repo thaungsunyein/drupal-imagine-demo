@@ -1,0 +1,65 @@
+#cloud-config
+# First-boot setup for vm-imagine-demo (Ubuntu 24.04).
+# Order matters: the data disk is mounted at /var/lib/docker BEFORE Docker is installed,
+# so images, containers and volumes (DB, Drupal files) live on the data disk.
+# Progress: /var/log/cloud-init-output.log; done when /var/lib/cloud/instance/boot-finished exists.
+
+package_update: true
+package_upgrade: true
+packages:
+  - ca-certificates
+  - curl
+  - gnupg
+  - git
+  - rsync
+  - unattended-upgrades
+
+write_files:
+  - path: /usr/local/sbin/mount-docker-disk.sh
+    permissions: "0755"
+    content: |
+      #!/bin/bash
+      # Format (only if blank) and mount the LUN 0 data disk at /var/lib/docker.
+      set -euo pipefail
+      dev=/dev/disk/azure/scsi1/lun0
+      for _ in $(seq 1 60); do [ -e "$dev" ] && break; sleep 2; done
+      [ -e "$dev" ] || { echo "data disk $dev not found" >&2; exit 1; }
+      dev=$(readlink -f "$dev")
+      if ! blkid "$dev" >/dev/null 2>&1; then
+        mkfs.ext4 -F -L dockerdata "$dev"
+      fi
+      uuid=$(blkid -s UUID -o value "$dev")
+      mkdir -p /var/lib/docker
+      grep -q "$uuid" /etc/fstab || \
+        echo "UUID=$uuid /var/lib/docker ext4 defaults,nofail,discard,x-systemd.device-timeout=30 0 2" >> /etc/fstab
+      mountpoint -q /var/lib/docker || mount /var/lib/docker
+  - path: /etc/apt/apt.conf.d/20auto-upgrades
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Unattended-Upgrade "1";
+      APT::Periodic::AutocleanInterval "7";
+  - path: /etc/docker/daemon.json
+    content: |
+      {
+        "log-driver": "local",
+        "log-opts": { "max-size": "10m", "max-file": "3" }
+      }
+
+runcmd:
+  - [ /usr/local/sbin/mount-docker-disk.sh ]
+  # Docker Engine + compose plugin from Docker's apt repo.
+  - install -m 0755 -d /etc/apt/keyrings
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  - chmod a+r /etc/apt/keyrings/docker.asc
+  - sh -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" > /etc/apt/sources.list.d/docker.list'
+  # azcopy (used by scripts/backup.sh) from Microsoft's package repo.
+  - curl -fsSL https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb -o /tmp/packages-microsoft-prod.deb
+  - dpkg -i /tmp/packages-microsoft-prod.deb
+  - apt-get update
+  - DEBIAN_FRONTEND=noninteractive apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin azcopy
+  - systemctl enable --now docker
+  - usermod -aG docker azureuser
+  - systemctl enable --now unattended-upgrades
+  # App checkout, Imagine source content, and the Cloudflare Origin CA cert (placed by hand).
+  - install -d -o azureuser -g azureuser /srv/drupal-imagine-demo /srv/imagine-source /srv/backups
+  - install -d -m 0750 -o root -g azureuser /etc/imagine/tls
