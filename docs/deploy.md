@@ -113,8 +113,9 @@ to skip the lookup. Other overrides are listed in [`scripts/lib.sh`](../scripts/
    `http://<ip>/`. Because `TRUSTED_HOSTS` only allows `cms.storyheroapp.com`, test it with
    `curl -H 'Host: cms.storyheroapp.com' http://<ip>/`.
 4. `scripts/deploy.sh`. On the first run it clones the repo, builds, installs Drupal from
-   `config/sync` (`drush site:install --existing-config`, random admin password) and imports the
-   Imagine migrations.
+   `config/sync` and imports the Imagine migrations. `--existing-config` doesn't work with the
+   standard profile, so it installs `standard` (random admin password), adopts the site UUID
+   from `config/sync`, deletes the default shortcuts and runs `drush cim`.
 5. Get an admin login link:
    ```bash
    ssh -i ~/.ssh/imagine_demo azureuser@<ip> 'cd /srv/drupal-imagine-demo && docker compose -f docker-compose.yml -f docker-compose.prod.yml exec php drush uli --uri=https://cms.storyheroapp.com'
