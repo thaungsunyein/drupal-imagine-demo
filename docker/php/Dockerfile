@@ -1,5 +1,6 @@
-# PHP-FPM image for Drupal 10 and 11 (both support PHP 8.3).
-FROM php:8.3-fpm-bookworm
+# PHP-FPM image for Drupal 10 and 11 (both support PHP 8.3). Debian 13 (trixie): Drupal 11.2+
+# needs SQLite 3.45+ for the Kernel tests (SIMPLETEST_DB=sqlite); bookworm ships 3.40.
+FROM php:8.3-fpm-trixie
 
 # Run PHP as the same user id that owns the code on the host (1000 = azureuser on the VM),
 # so files Drupal and Composer write are not owned by root.
