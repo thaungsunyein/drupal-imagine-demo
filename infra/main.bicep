@@ -15,6 +15,9 @@ param location string = resourceGroup().location
 @description('Short name used to derive resource names.')
 param prefix string = 'imagine-demo'
 
+@description('false = only network + storage, no public IP/NIC/VM. Lets backups storage exist while VM capacity is pending; re-run with true to add the VM.')
+param deployVm bool = true
+
 @description('VM size. B2s = 2 vCPU / 4 GB, enough for nginx + php-fpm + MariaDB.')
 param vmSize string = 'Standard_B2s'
 
@@ -115,7 +118,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
   }
 }
 
-resource pip 'Microsoft.Network/publicIPAddresses@2024-05-01' = {
+resource pip 'Microsoft.Network/publicIPAddresses@2024-05-01' = if (deployVm) {
   name: pipName
   location: location
   sku: { name: 'Standard', tier: 'Regional' }
@@ -125,7 +128,7 @@ resource pip 'Microsoft.Network/publicIPAddresses@2024-05-01' = {
   }
 }
 
-resource nic 'Microsoft.Network/networkInterfaces@2024-05-01' = {
+resource nic 'Microsoft.Network/networkInterfaces@2024-05-01' = if (deployVm) {
   name: nicName
   location: location
   properties: {
@@ -135,14 +138,14 @@ resource nic 'Microsoft.Network/networkInterfaces@2024-05-01' = {
         properties: {
           privateIPAllocationMethod: 'Dynamic'
           subnet: { id: vnet.properties.subnets[0].id }
-          publicIPAddress: { id: pip.id }
+          publicIPAddress: { id: pip!.id }
         }
       }
     ]
   }
 }
 
-resource vm 'Microsoft.Compute/virtualMachines@2024-07-01' = {
+resource vm 'Microsoft.Compute/virtualMachines@2024-07-01' = if (deployVm) {
   name: vmName
   location: location
   zones: empty(zone) ? null : [ zone ]
@@ -196,7 +199,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-07-01' = {
       ]
     }
     networkProfile: {
-      networkInterfaces: [ { id: nic.id } ]
+      networkInterfaces: [ { id: nic!.id } ]
     }
     diagnosticsProfile: {
       bootDiagnostics: { enabled: true } // managed storage, no extra account
@@ -269,9 +272,9 @@ resource backupOperatorRole 'Microsoft.Authorization/roleAssignments@2022-04-01'
   }
 }
 
-output vmName string = vm.name
-output publicIp string = pip.properties.ipAddress
-output sshCommand string = 'ssh -i ~/.ssh/imagine_demo ${adminUsername}@${pip.properties.ipAddress}'
+output vmName string = deployVm ? vmName : ''
+output publicIp string = deployVm ? pip!.properties.ipAddress : ''
+output sshCommand string = deployVm ? 'ssh -i ~/.ssh/imagine_demo ${adminUsername}@${pip!.properties.ipAddress}' : ''
 output storageAccountName string = storage.name
 output backupsContainerUrl string = '${storage.properties.primaryEndpoints.blob}backups'
 output nsgName string = nsg.name

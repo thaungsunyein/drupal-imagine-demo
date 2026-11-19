@@ -52,10 +52,41 @@ Then run the same command with `az deployment group create` instead of `what-if`
 safe and also the way to change the SSH source IP when yours changes. The deployment outputs give
 the public IP, the ssh command and the storage account name.
 
-If Azure answers `SkuNotAvailable` (Capacity Restrictions), the subscription isn't allowed that VM
-size in that region yet. File a quota/region access request in the portal (Help + support > Create
-a support request > Service and subscription limits (quotas)), or try another zone with
-`-p zone=1|2|3`.
+### Status on 2026-11-19: storage deployed, VM pending
+
+On 2026-11-19 only the network and storage are deployed (`-p deployVm=false`). The storage
+account is `stimaginedemoscupwphj5cb`. Azure would not create a VM on this subscription:
+
+- **`SkuNotAvailable` (Capacity Restrictions):** Standard_B2s, plus B2ms, D2as_v4, D2als_v6,
+  D2pls_v6 and A2_v2 in switzerlandnorth (every zone). B2s is refused the same way in
+  germanywestcentral, northeurope, swedencentral, francecentral and uksouth. westeurope isn't
+  accepting new customers at all.
+- **Bv2 sizes:** B2als_v2, B2as_v2 and B2s_v2 are unrestricted in swedencentral, italynorth and
+  polandcentral, but the subscription has **0 vCPU quota** for the Basv2/Bsv2 families
+  (`QuotaExceeded`).
+
+The fix is a portal request: Help + support > Create a support request > Service and subscription
+limits (quotas) > Compute-VM (cores-vCPUs). Ask for access to Standard_B2s / BS family in
+Switzerland North. As a faster alternative, ask for 2 vCPUs of Basv2 quota in Switzerland North
+or Sweden Central. Basv2 increases are often approved automatically on the portal's Quotas page.
+
+Once approved, add the VM with one command. `location` and `vmSize` are parameters. A VM in another
+region still works with the switzerlandnorth storage, since backups simply cross regions:
+
+```bash
+az deployment group create -g rg-imagine-demo -f infra/main.bicep -p infra/main.parameters.json \
+  -p location=switzerlandnorth vmSize=Standard_B2s \
+     sshSourceIp="$(curl -s https://api.ipify.org)" sshPublicKey="$(cat ~/.ssh/imagine_demo.pub)" \
+     backupOperatorPrincipalId="$(az ad signed-in-user show --query id -o tsv)"
+```
+
+Caveat: `location` applies to every resource in the template. To put the VM in another region,
+first delete the empty `vnet-imagine-demo` and `nsg-imagine-demo` (a NIC must be in its VNet's
+region). Leave the storage account alone: Azure refuses to move it, and the deployment fails with
+an error rather than changing anything. The easiest route is to keep switzerlandnorth. You can also
+try a single zone with `-p zone=1|2|3`.
+
+Then run `scripts/init-env.sh` and `scripts/sync-source.sh`.
 
 First boot takes 3-5 minutes. Check it with:
 
