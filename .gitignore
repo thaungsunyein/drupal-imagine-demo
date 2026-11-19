@@ -1,0 +1,38 @@
+# Composer-managed code (rebuilt from composer.lock)
+/vendor/
+/web/core/
+/web/modules/contrib/
+/web/themes/contrib/
+/web/profiles/contrib/
+/web/libraries/
+
+# Drupal runtime files and local settings
+/web/sites/*/files/
+/web/sites/*/private/
+/web/sites/*/settings.local.php
+/web/sites/*/services.local.yml
+
+# Secrets — never in a public repo
+.env
+*.pem
+*.key
+*.sas
+
+# Database dumps and backups
+*.sql
+*.sql.gz
+*.tar.gz
+/backups/
+
+# Full Imagine media lives on the server, not in git (only source-sample/ is committed)
+/imagine-source/
+
+# Private planning notes (application context) — kept locally, never published
+/docs/superpowers/
+
+# Local tooling
+.DS_Store
+.idea/
+.vscode/
+.phpunit.result.cache
+/.superpowers/
