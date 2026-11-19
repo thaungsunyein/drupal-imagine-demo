@@ -1,0 +1,2 @@
+# Production: the dev server block is replaced by the files in docker/nginx/prod/,
+# copied into conf.d by docker/nginx/prod/40-imagine-tls.sh at container start.
