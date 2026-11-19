@@ -2,10 +2,26 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "prefix": { "value": "imagine-demo" },
-    "vmSize": { "value": "Standard_B2s" },
-    "adminUsername": { "value": "azureuser" },
-    "dataDiskSizeGB": { "value": 32 },
-    "backupRetentionDays": { "value": 30 }
+    "location": {
+      "value": "switzerlandnorth"
+    },
+    "vmLocation": {
+      "value": "swedencentral"
+    },
+    "prefix": {
+      "value": "imagine-demo"
+    },
+    "vmSize": {
+      "value": "Standard_B2als_v2"
+    },
+    "adminUsername": {
+      "value": "azureuser"
+    },
+    "dataDiskSizeGB": {
+      "value": 32
+    },
+    "backupRetentionDays": {
+      "value": 30
+    }
   }
 }

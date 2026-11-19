@@ -12,13 +12,16 @@
 @description('Azure region. Defaults to the resource group location.')
 param location string = resourceGroup().location
 
+@description('Region for the VM and its network (VNet, NSG, public IP, NIC). Can differ from the storage region when VM capacity is short.')
+param vmLocation string = location
+
 @description('Short name used to derive resource names.')
 param prefix string = 'imagine-demo'
 
 @description('false = only network + storage, no public IP/NIC/VM. Lets backups storage exist while VM capacity is pending; re-run with true to add the VM.')
 param deployVm bool = true
 
-@description('VM size. B2s = 2 vCPU / 4 GB, enough for nginx + php-fpm + MariaDB.')
+@description('VM size. 2 vCPU / 4 GB (B2s, B2als_v2) is enough for nginx + php-fpm + MariaDB.')
 param vmSize string = 'Standard_B2s'
 
 @description('Availability zone for the VM and its disks ("1", "2", "3"), or empty for no zone. Useful when a size has no regional capacity.')
@@ -53,7 +56,7 @@ var storageName = take('st${replace(prefix, '-', '')}${uniqueString(resourceGrou
 
 resource nsg 'Microsoft.Network/networkSecurityGroups@2024-05-01' = {
   name: nsgName
-  location: location
+  location: vmLocation
   properties: {
     securityRules: [
       {
@@ -103,7 +106,7 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2024-05-01' = {
 
 resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
   name: vnetName
-  location: location
+  location: vmLocation
   properties: {
     addressSpace: { addressPrefixes: [ '10.40.0.0/16' ] }
     subnets: [
@@ -120,7 +123,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
 
 resource pip 'Microsoft.Network/publicIPAddresses@2024-05-01' = if (deployVm) {
   name: pipName
-  location: location
+  location: vmLocation
   sku: { name: 'Standard', tier: 'Regional' }
   properties: {
     publicIPAllocationMethod: 'Static'
@@ -130,7 +133,7 @@ resource pip 'Microsoft.Network/publicIPAddresses@2024-05-01' = if (deployVm) {
 
 resource nic 'Microsoft.Network/networkInterfaces@2024-05-01' = if (deployVm) {
   name: nicName
-  location: location
+  location: vmLocation
   properties: {
     ipConfigurations: [
       {
@@ -147,7 +150,7 @@ resource nic 'Microsoft.Network/networkInterfaces@2024-05-01' = if (deployVm) {
 
 resource vm 'Microsoft.Compute/virtualMachines@2024-07-01' = if (deployVm) {
   name: vmName
-  location: location
+  location: vmLocation
   zones: empty(zone) ? null : [ zone ]
   properties: {
     hardwareProfile: { vmSize: vmSize }
