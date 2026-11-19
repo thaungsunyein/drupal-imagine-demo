@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\imagine_migrate\Plugin\migrate\source;
 
+use Drupal\migrate\Attribute\MigrateSource;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\Plugin\MigrationInterface;
 
@@ -18,11 +19,14 @@ use Drupal\migrate\Plugin\MigrationInterface;
  * Missing files produce no row, so a chapter without narration simply ends
  * up with an empty narration field.
  *
+ * The annotation is kept for Drupal 10, which has no MigrateSource attribute.
+ *
  * @MigrateSource(
  *   id = "imagine_asset",
  *   source_module = "imagine_migrate"
  * )
  */
+#[MigrateSource(id: 'imagine_asset')]
 final class ImagineAsset extends ImagineSourceBase {
 
   private const KINDS = ['narration', 'scene', 'cover'];

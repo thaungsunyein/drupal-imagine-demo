@@ -10,6 +10,8 @@ use Drupal\migrate\MigrateExecutable;
 use Drupal\migrate\MigrateMessage;
 use Drupal\migrate\Plugin\MigrateIdMapInterface;
 use Drupal\node\NodeInterface;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Runs the Imagine migrations against the fixture content.
@@ -17,9 +19,9 @@ use Drupal\node\NodeInterface;
  * The content model is not duplicated for the test: setUp() loads the real
  * exported config from config/sync, so the test also proves that config
  * matches what the migrations write to.
- *
- * @group imagine_migrate
  */
+#[Group('imagine_migrate')]
+#[RunTestsInSeparateProcesses]
 final class ImagineMigrationTest extends KernelTestBase {
 
   /**

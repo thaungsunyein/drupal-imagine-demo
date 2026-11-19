@@ -6,6 +6,8 @@ namespace Drupal\Tests\imagine_migrate\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\migrate\Plugin\MigrateSourceInterface;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests the Imagine source plugins against the fixture content folder.
@@ -13,9 +15,9 @@ use Drupal\migrate\Plugin\MigrateSourceInterface;
  * The fixtures are a trimmed copy of the real Imagine layout: the English
  * Alice with two sections (text only for chapter 1), its French translation,
  * one narration file per book, two English scene images and a cover each.
- *
- * @group imagine_migrate
  */
+#[Group('imagine_migrate')]
+#[RunTestsInSeparateProcesses]
 final class ImagineSourceTest extends KernelTestBase {
 
   /**

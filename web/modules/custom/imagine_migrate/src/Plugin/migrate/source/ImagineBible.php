@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Drupal\imagine_migrate\Plugin\migrate\source;
 
+use Drupal\migrate\Attribute\MigrateSource;
+
 /**
  * One row per book, read from classics/<book>/bible.json.
  *
@@ -20,11 +22,14 @@ namespace Drupal\imagine_migrate\Plugin\migrate\source;
  *   book_ids: [alice-au-pays-des-merveilles, alice-im-wunderland]
  * @endcode
  *
+ * The annotation is kept for Drupal 10, which has no MigrateSource attribute.
+ *
  * @MigrateSource(
  *   id = "imagine_bible",
  *   source_module = "imagine_migrate"
  * )
  */
+#[MigrateSource(id: 'imagine_bible')]
 final class ImagineBible extends ImagineSourceBase {
 
   /**
