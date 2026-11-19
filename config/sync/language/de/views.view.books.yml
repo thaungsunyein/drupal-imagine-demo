@@ -1,0 +1,12 @@
+label: Bücher
+display:
+  default:
+    display_options:
+      title: Bücher
+      empty:
+        area_text_custom:
+          content: 'Es wurden noch keine Bücher importiert.'
+  page_1:
+    display_options:
+      menu:
+        title: Bücher

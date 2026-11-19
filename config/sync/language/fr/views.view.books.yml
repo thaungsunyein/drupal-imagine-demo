@@ -1,0 +1,12 @@
+label: Livres
+display:
+  default:
+    display_options:
+      title: Livres
+      empty:
+        area_text_custom:
+          content: "Aucun livre n'a encore été importé."
+  page_1:
+    display_options:
+      menu:
+        title: Livres

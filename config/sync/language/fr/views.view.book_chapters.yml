@@ -1,0 +1,8 @@
+label: 'Chapitres du livre'
+display:
+  default:
+    display_options:
+      title: Chapitres
+  block_1:
+    display_options:
+      block_description: 'Chapitres du livre'

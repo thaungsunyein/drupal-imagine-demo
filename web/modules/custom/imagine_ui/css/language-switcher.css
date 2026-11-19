@@ -1,0 +1,28 @@
+/* Show the language links side by side (EN · FR · DE) instead of a bulleted list. */
+.imagine-language-switcher ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.imagine-language-switcher a {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.imagine-language-switcher a.is-active {
+  text-decoration: underline;
+}
+
+/* In Olivero's desktop header, line the links up with the menu items. */
+@media (min-width: 75rem) {
+  .imagine-language-switcher {
+    display: flex;
+    align-items: center;
+    margin-inline-end: 1.5rem;
+  }
+}

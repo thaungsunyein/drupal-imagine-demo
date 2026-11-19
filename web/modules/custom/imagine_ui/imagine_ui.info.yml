@@ -1,0 +1,7 @@
+name: 'Imagine UI'
+type: module
+description: 'Small front-end touches for the Imagine demo, such as the inline language switcher.'
+package: Imagine
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:language

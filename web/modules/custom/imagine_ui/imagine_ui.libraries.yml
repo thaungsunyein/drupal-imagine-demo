@@ -1,0 +1,4 @@
+language-switcher:
+  css:
+    component:
+      css/language-switcher.css: {}

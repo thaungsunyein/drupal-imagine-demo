@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Front-end touches for the Imagine demo.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_preprocess_HOOK() for block templates.
+ */
+function imagine_ui_preprocess_block(array &$variables): void {
+  if (str_starts_with($variables['plugin_id'], 'language_block:')) {
+    $variables['#attached']['library'][] = 'imagine_ui/language-switcher';
+    $variables['attributes']['class'][] = 'imagine-language-switcher';
+  }
+}

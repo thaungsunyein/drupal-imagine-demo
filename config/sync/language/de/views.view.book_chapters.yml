@@ -1,0 +1,8 @@
+label: 'Kapitel des Buchs'
+display:
+  default:
+    display_options:
+      title: Kapitel
+  block_1:
+    display_options:
+      block_description: 'Kapitel des Buchs'
