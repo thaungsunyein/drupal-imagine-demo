@@ -190,7 +190,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-07-01' = if (deployVm) {
       }
       dataDisks: [
         {
-          // cloud-init finds this as /dev/disk/azure/scsi1/lun0 and mounts it at /var/lib/docker.
+          // cloud-init finds LUN 0 (/dev/disk/azure/data/by-lun/0 or scsi1/lun0) and mounts it at /var/lib/docker.
           name: 'datadisk-${prefix}-docker'
           lun: 0
           createOption: 'Empty'

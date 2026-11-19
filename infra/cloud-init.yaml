@@ -19,11 +19,17 @@ write_files:
     permissions: "0755"
     content: |
       #!/bin/bash
-      # Format (only if blank) and mount the LUN 0 data disk at /var/lib/docker.
+      # Format (only if blank) and mount the LUN 0 data disk at /var/lib/docker. Safe to re-run.
       set -euo pipefail
-      dev=/dev/disk/azure/scsi1/lun0
-      for _ in $(seq 1 60); do [ -e "$dev" ] && break; sleep 2; done
-      [ -e "$dev" ] || { echo "data disk $dev not found" >&2; exit 1; }
+      # LUN 0 shows up as data/by-lun/0 on NVMe sizes (v6) and as scsi1/lun0 on SCSI sizes.
+      dev=
+      for _ in $(seq 1 60); do
+        for c in /dev/disk/azure/data/by-lun/0 /dev/disk/azure/scsi1/lun0; do
+          [ -e "$c" ] && { dev=$c; break 2; }
+        done
+        sleep 2
+      done
+      [ -n "$dev" ] || { echo "data disk (LUN 0) not found" >&2; exit 1; }
       dev=$(readlink -f "$dev")
       if ! blkid "$dev" >/dev/null 2>&1; then
         mkfs.ext4 -F -L dockerdata "$dev"
