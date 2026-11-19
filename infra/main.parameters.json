@@ -11,6 +11,9 @@
     "prefix": {
       "value": "imagine-demo"
     },
+    "vmExists": {
+      "value": true
+    },
     "vmSize": {
       "value": "Standard_D2als_v6"
     },

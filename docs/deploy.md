@@ -30,6 +30,7 @@ VM public IP: **20.240.50.42** (static).
 | Storage | `stimaginedemo<hash>` | StorageV2, Standard_LRS, Cool, TLS 1.2, no public blob access, **no shared keys** (Entra ID only), 7-day soft delete |
 | Container | `backups` | private; lifecycle rule deletes blobs after 30 days |
 | Role | Storage Blob Data Contributor | for the person deploying, so they can mint user-delegation SAS tokens |
+| Identity | VM system-assigned managed identity | Storage Blob Data Contributor on the `backups` container only, used by the daily backup |
 
 [`infra/cloud-init.yaml`](../infra/cloud-init.yaml) runs on first boot. It formats and mounts the
 data disk at `/var/lib/docker` before installing Docker Engine and the compose plugin from Docker's
@@ -53,7 +54,9 @@ az deployment group what-if -g rg-imagine-demo -f infra/main.bicep -p infra/main
 ```
 
 Then run the same command with `az deployment group create` instead of `what-if`. Re-running it is
-safe and also the way to change the SSH source IP when yours changes. The deployment outputs give
+safe and also the way to change the SSH source IP when yours changes. `vmExists: true` in the
+parameters file stops it from sending cloud-init again: Azure accepts cloud-init only when a VM is
+created, so a redeploy that includes it fails. Set it to `false` only to build a new VM. The deployment outputs give
 the public IP, the ssh command and the storage account name.
 
 ### Why Sweden Central and D2als_v6
@@ -160,16 +163,40 @@ The log line `imagine: Origin CA cert found` confirms https is on.
 
 ## Backups and restores
 
+**Daily, automatic.** A systemd timer on the VM runs `/usr/local/sbin/imagine-backup` (a copy of
+[`scripts/vm-backup.sh`](../scripts/vm-backup.sh)) every day at about 02:30 UTC, give or take
+15 minutes. If the VM was off at that time, it runs at the next boot. It runs
+`drush sql-dump --gzip` and tars the files volume, without the regenerated css/js/php caches.
+It then uploads `db.sql.gz`, `files.tar.gz` and `git-commit.txt` to `backups/<UTC timestamp>/`
+with azcopy, which logs in with the **VM's managed identity**. That identity may write only to
+the `backups` container, so no key or SAS is stored on the VM. The VM keeps the newest 3 copies
+in `/srv/backups`. Azure deletes blobs after 30 days and keeps deleted ones for 7 more days
+(soft delete). Each backup is about 115 MB, so 30 days cost a few cents.
+
+Check it:
+
+```bash
+ssh -i ~/.ssh/imagine_demo azureuser@<ip> 'systemctl list-timers imagine-backup.timer --no-pager; journalctl -u imagine-backup -n 20 --no-pager -o cat'
+```
+
+```bash
+scripts/restore.sh --list
+```
+
+Re-run `scripts/install-backup-timer.sh` after changing `scripts/vm-backup.sh`, to update the
+copy on the VM. Add `--run-now` to also take a backup immediately. Nothing alerts you when a
+backup fails. Look at `restore.sh --list` now and then: the newest entry should be from today.
+
+**Ad hoc, from your machine:**
+
 ```bash
 scripts/backup.sh
 ```
 
-On your machine it mints a 60-minute, create/write-only user-delegation SAS (`az storage container
-generate-sas --as-user --auth-mode login`, no account keys, since shared-key access is disabled on
-the account). The SAS goes to the VM over ssh stdin. It is never written to the repo or the
-command line. The VM then runs `drush sql-dump --gzip`, tars the files volume (without the
-regenerated css/js/php caches), and uploads `db.sql.gz`, `files.tar.gz` and `git-commit.txt` to
-`backups/<UTC timestamp>/` with azcopy.
+It runs the same `vm-backup.sh` on the VM, but uploads with a 60-minute, create/write-only
+user-delegation SAS minted on your machine (`az storage container generate-sas --as-user
+--auth-mode login`, no account keys). The SAS goes over ssh stdin and is never written to the
+repo or a command line. Use it before a risky deploy.
 
 ```bash
 scripts/restore.sh --list
@@ -183,9 +210,6 @@ Restore asks you to type `restore`, or pass `--yes`. It downloads the backup wit
 drops and re-imports the database, replaces the files, fixes ownership and rebuilds caches. Code
 is not rolled back. If the schema changed since the backup, first deploy the commit in
 `git-commit.txt`.
-
-There is no automatic schedule yet. Run a backup before every deploy that changes data, or add a
-cron job on your machine.
 
 ## Rotating secrets
 
@@ -210,6 +234,8 @@ Secrets live only in `/srv/drupal-imagine-demo/.env` on the VM.
 - **Drupal admin password**: `drush user:password admin "<new>"`, or just use `drush uli`.
 - **SSH key**: add the new public key to `~azureuser/.ssh/authorized_keys`, test it, remove the old
   one, and pass the new key as `sshPublicKey` on the next Bicep deployment.
+- **Backup identity**: nothing to rotate. The VM's managed identity has no secret. To revoke
+  it, remove its role assignment on the `backups` container.
 - **SAS tokens**: nothing to rotate. Each one expires after 60 minutes. To cut access right away,
   run `az storage account revoke-delegation-keys -g rg-imagine-demo -n <storage account>`.
 - **Origin CA cert**: create a new one in Cloudflare, replace both files, restart nginx.
