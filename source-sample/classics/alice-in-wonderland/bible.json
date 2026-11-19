@@ -1,0 +1,1142 @@
+{
+  "schemaVersion": 1,
+  "id": "alice-in-wonderland",
+  "title": "Alice's Adventures in Wonderland",
+  "author": "Lewis Carroll",
+  "firstPublished": 1865,
+  "language": "en",
+  "enrichmentStage": "complete",
+  "edition": {
+    "publicDomain": true,
+    "sourceEdition": "Macmillan, 1866 text as established by Project Gutenberg eBook #11",
+    "sourceUrl": "https://www.gutenberg.org/ebooks/11",
+    "rights": {
+      "published": 1866,
+      "creators": [
+        {
+          "name": "Lewis Carroll",
+          "role": "author",
+          "died": 1898
+        }
+      ]
+    },
+    "notes": "Text and the original Tenniel illustrations are public domain. StoryHero artwork is newly commissioned and is not."
+  },
+  "positioning": {
+    "coverTagline": "A little curiosity goes a long way.",
+    "hook": "Nothing down here makes sense. That's the point.",
+    "description": "Alice follows a hurrying rabbit out of a dull afternoon and into a world with no rules she recognises. Everyone she meets is certain she is the strange one. Working out who she is turns out to be the only way home.",
+    "themes": [
+      "curiosity",
+      "growing up",
+      "identity",
+      "nonsense as freedom",
+      "standing your ground"
+    ],
+    "genres": [
+      "Classic",
+      "Fantasy",
+      "Adventure"
+    ],
+    "moodCollections": [
+      "Beautifully strange worlds",
+      "Books that feel like dreaming"
+    ],
+    "audience": {
+      "ageGuidance": "all-ages",
+      "contentNotes": []
+    },
+    "whyNow": "Wonderland is a story about being the only person in the room who thinks the rules are odd. For a reader who feels out of step with everyone around them, Alice is not lost. She is the only one asking.",
+    "genreSlugs": [
+      "classic",
+      "fantasy",
+      "adventure"
+    ]
+  },
+  "artDirection": {
+    "styleKeywords": [
+      "cinematic",
+      "painterly",
+      "anime-influenced",
+      "magical realism",
+      "storybook",
+      "luminous"
+    ],
+    "palette": [
+      "#1B2A4A",
+      "#7E5BA6",
+      "#E86AA0",
+      "#F2E3C2",
+      "#2F7D6B",
+      "#D94F4F"
+    ],
+    "lighting": "Moonlight from behind, warm lantern and bioluminescent fill from below. Wonderland glows from inside itself.",
+    "negativePrompt": "photo-real, horror, gore, modern clothing, text artefacts, extra fingers, watermark, harsh contrast",
+    "visualArc": [
+      {
+        "act": "Act I — Falling",
+        "feeling": "Curiosity and vertigo",
+        "palette": [
+          "Gold aperture",
+          "Deep indigo",
+          "Warm brass"
+        ],
+        "chapters": "Chapters I-IV"
+      },
+      {
+        "act": "Act II — Wandering",
+        "feeling": "Wonder and misdirection",
+        "palette": [
+          "Bioluminescent teal",
+          "Violet",
+          "Lantern amber"
+        ],
+        "chapters": "Chapters V-VII"
+      },
+      {
+        "act": "Act III — The Court",
+        "feeling": "Absurd threat, then release",
+        "palette": [
+          "Crimson",
+          "Hedge green",
+          "Paper white"
+        ],
+        "chapters": "Chapters VIII-XII"
+      }
+    ],
+    "characterAnchor": "Alice: a girl of about eleven, long wavy blonde hair with a black bow, pale blue dress with a white pinafore, white stockings, dark buckled shoes. White Rabbit: white fur, pink inner ears, blue waistcoat, gold pocket watch on a chain. Cheshire Cat: violet and indigo striped fur, luminous eyes, impossibly wide grin. Mad Hatter: oversized green top hat with a 10/6 price card, wild pale hair, crimson bow tie, mismatched tailoring. March Hare: tawny fur, long upright ears, brown bow tie. Dormouse: small and round, half-closed eyes. Queen of Hearts: black and crimson gown with heart motifs, dark curled hair, gold crown set with rubies. King of Hearts: white beard, red and ermine robe. Recurring props: the gold pocket watch, a floral porcelain tea set, drifting playing cards.",
+    "referenceSheets": [
+      "alice",
+      "white-rabbit",
+      "cheshire-cat",
+      "mad-hatter",
+      "march-hare",
+      "dormouse",
+      "queen-of-hearts",
+      "pocket-watch",
+      "hatters-hat",
+      "caterpillar",
+      "king-of-hearts",
+      "gryphon",
+      "mock-turtle"
+    ],
+    "coverAnchors": [
+      "alice",
+      "white-rabbit",
+      "cheshire-cat",
+      "pocket-watch",
+      "playing-cards"
+    ]
+  },
+  "artwork": {
+    "cover": {
+      "file": "cover.webp",
+      "aspect": "2:3",
+      "textFree": false,
+      "composition": "Alice from behind, three-quarter turn, looking across a moonlit cloud-castle valley with waterfalls. Cheshire Cat grinning in the canopy upper left; White Rabbit with pocket watch lower left; roses and scattered cards framing the foreground; heart topiary maze mid-ground; full moon upper right. Serif title over the sky, author in letterspaced caps at the foot.",
+      "prompt": "anime-influenced painterly illustration, young girl in a blue and white pinafore dress with long blonde hair and a black bow seen from behind, looking out over a moonlit valley of floating cloud castles and waterfalls, grinning violet cheshire cat in the dark canopy upper left, white rabbit in a waistcoat with a gold pocket watch lower left, crimson roses and scattered playing cards framing the foreground, heart-shaped topiary maze below, full moon and starfield, cinematic rim lighting, 2:3 portrait"
+    },
+    "thumbnail": {
+      "file": "thumbnail.webp",
+      "aspect": "2:3",
+      "textFree": true,
+      "composition": "Alice lower left, blonde waving hair and black bow, blue dress and white pinafore, looking up and to the right. A dark cat on a branch upper right; giant pale mushrooms left and right; playing cards drifting; a white and blue fairytale castle at centre under a bright cyan sky, the whole framed by a leafy arch. Delivered asset — the brightest thumbnail in the set.",
+      "prompt": "young girl with long wavy blonde hair and a black bow in a blue dress and white pinafore, lower left, looking up and to the right in wonder, a dark cat perched on a branch upper right, giant pale mushrooms at either side, playing cards drifting through the air, white and blue fairytale castle at centre, bright cyan sky, leafy arch framing the scene, painterly anime-influenced, 2:3 portrait, no text"
+    },
+    "heroPortrait": {
+      "file": "hero.webp",
+      "aspect": "9:16",
+      "textFree": true,
+      "composition": "Vertical fall down the rabbit hole, with generous empty space at the top for editorial type."
+    },
+    "listening": {
+      "file": "listening.webp",
+      "aspect": "1:1",
+      "textFree": true,
+      "composition": "Circular-safe: a pocket watch face dissolving into starfield."
+    }
+  },
+  "characters": [
+    {
+      "id": "alice",
+      "name": "Alice",
+      "role": "protagonist",
+      "traits": [
+        "Curious",
+        "Imaginative",
+        "Brave"
+      ],
+      "quote": "I wonder...",
+      "firstAppears": 1,
+      "description": "Somewhere around eleven and entirely unimpressed by being told how things are done. She argues with a queen because the argument is obviously correct. Her courage is not fearlessness, it is refusing to pretend something makes sense when it doesn't.",
+      "anchors": [
+        "long blonde hair",
+        "black hair bow",
+        "pale blue dress with white pinafore",
+        "white stockings and dark buckled shoes"
+      ],
+      "voice": {
+        "direction": "Bright, level, thinking aloud. Never shrill.",
+        "age": "child",
+        "accent": "neutral English"
+      }
+    },
+    {
+      "id": "white-rabbit",
+      "name": "White Rabbit",
+      "role": "ensemble",
+      "traits": [
+        "Hasty",
+        "Anxious",
+        "Polite"
+      ],
+      "quote": "Oh dear! Oh dear!",
+      "firstAppears": 1,
+      "description": "Permanently late for something he never explains. Apologises while running away from you.",
+      "anchors": [
+        "white fur",
+        "blue waistcoat",
+        "gold pocket watch on a chain",
+        "pink inner ears"
+      ],
+      "voice": {
+        "direction": "Fluttering, breathless, always mid-departure.",
+        "age": "adult",
+        "accent": "clipped English"
+      }
+    },
+    {
+      "id": "caterpillar",
+      "name": "Caterpillar",
+      "role": "mentor",
+      "traits": [
+        "Enigmatic",
+        "Philosophical",
+        "Detached"
+      ],
+      "quote": "Who are you?",
+      "firstAppears": 5,
+      "description": "Asks Alice the only question in the book that actually matters, and is unhelpful about the answer on purpose.",
+      "anchors": [
+        "cyan and blue segmented body",
+        "coiled on a mushroom cap",
+        "hookah smoke curling into letters"
+      ],
+      "voice": {
+        "direction": "Slow, flat, faintly bored.",
+        "age": "ageless",
+        "accent": "languid English"
+      }
+    },
+    {
+      "id": "cheshire-cat",
+      "name": "Cheshire Cat",
+      "role": "mentor",
+      "traits": [
+        "Mysterious",
+        "Playful",
+        "Wise"
+      ],
+      "quote": "We're all mad here.",
+      "firstAppears": 6,
+      "description": "The only one in Wonderland who tells Alice the truth, and only ever sideways. Arrives grin first and leaves grin last.",
+      "anchors": [
+        "violet and indigo striped fur",
+        "luminous eyes",
+        "impossibly wide grin",
+        "fades tail-first, grin remains"
+      ],
+      "voice": {
+        "direction": "Unhurried, amused, faintly echoing.",
+        "age": "ageless",
+        "accent": "warm English"
+      }
+    },
+    {
+      "id": "mad-hatter",
+      "name": "Mad Hatter",
+      "role": "ally",
+      "traits": [
+        "Eccentric",
+        "Chaotic",
+        "Kind"
+      ],
+      "quote": "It's always tea time.",
+      "firstAppears": 7,
+      "description": "Stuck at six o'clock and making the best of it. The rudeness is a game. The kindness underneath is not.",
+      "anchors": [
+        "oversized green top hat with a 10/6 price card",
+        "wild pale hair",
+        "crimson bow tie",
+        "mismatched tailoring"
+      ],
+      "voice": {
+        "direction": "Fast, delighted, swerving mid-sentence.",
+        "age": "adult",
+        "accent": "English"
+      }
+    },
+    {
+      "id": "march-hare",
+      "name": "March Hare",
+      "role": "ensemble",
+      "traits": [
+        "Energetic",
+        "Impulsive",
+        "Loyal"
+      ],
+      "quote": "More tea?",
+      "firstAppears": 7,
+      "description": "Agrees with the Hatter about everything, including the things the Hatter has just contradicted.",
+      "anchors": [
+        "tawny fur",
+        "long upright ears",
+        "brown bow tie",
+        "teacup permanently in hand"
+      ],
+      "voice": {
+        "direction": "Loud, eager, a beat behind the joke.",
+        "age": "adult",
+        "accent": "English"
+      }
+    },
+    {
+      "id": "dormouse",
+      "name": "Dormouse",
+      "role": "ensemble",
+      "traits": [
+        "Sleepy",
+        "Gentle",
+        "Elusive"
+      ],
+      "quote": "Zzz...",
+      "firstAppears": 7,
+      "description": "Asleep for most of the conversation and somehow still the one who says the strangest thing in it.",
+      "anchors": [
+        "small round body",
+        "curled inside a floral teacup",
+        "half-closed eyes"
+      ],
+      "voice": {
+        "direction": "Slurred, drifting, trailing into nothing.",
+        "age": "ageless",
+        "accent": "soft English"
+      }
+    },
+    {
+      "id": "queen-of-hearts",
+      "name": "Queen of Hearts",
+      "role": "antagonist",
+      "traits": [
+        "Authoritative",
+        "Volatile",
+        "Dramatic"
+      ],
+      "quote": "Off with their heads!",
+      "firstAppears": 8,
+      "description": "Rules by volume. Everyone obeys her and nobody is actually afraid, which is the part she cannot bear.",
+      "anchors": [
+        "black and crimson gown",
+        "heart motifs",
+        "dark curled hair",
+        "gold crown set with rubies"
+      ],
+      "voice": {
+        "direction": "Theatrical, escalating, enjoys her own fury.",
+        "age": "adult",
+        "accent": "grand English"
+      }
+    },
+    {
+      "id": "king-of-hearts",
+      "name": "King of Hearts",
+      "role": "foil",
+      "traits": [
+        "Well-meaning",
+        "Forgetful",
+        "Gentle"
+      ],
+      "quote": "Consider, my dear...",
+      "firstAppears": 8,
+      "description": "Quietly pardons everyone his wife sentences, and hopes she doesn't notice.",
+      "anchors": [
+        "white beard",
+        "red and ermine robe",
+        "slightly oversized crown"
+      ],
+      "voice": {
+        "direction": "Mild, placating, often interrupted.",
+        "age": "elderly",
+        "accent": "English"
+      }
+    },
+    {
+      "id": "gryphon",
+      "name": "The Gryphon",
+      "role": "ally",
+      "traits": [
+        "Brusque",
+        "Unsentimental",
+        "Obliging"
+      ],
+      "quote": "It's all her fancy, that: they never executes nobody.",
+      "firstAppears": 9,
+      "description": "Escorts Alice everywhere she is sent and complains about it the whole way. Tells her, flatly and correctly, that none of the Queen’s sentences are ever carried out — the only creature in Wonderland who says so out loud.",
+      "anchors": [
+        "eagle head, hooked beak and feathered forelegs with talons",
+        "lion's body, hindquarters and tufted tail",
+        "tawny gold plumage over a deep russet coat",
+        "folded wings held close unless moving"
+      ],
+      "voice": {
+        "direction": "Blunt and brisk, cutting people off mid-sentence. Never unkind.",
+        "age": "ageless",
+        "accent": "rough English"
+      }
+    },
+    {
+      "id": "mock-turtle",
+      "name": "The Mock Turtle",
+      "role": "ensemble",
+      "traits": [
+        "Melancholy",
+        "Sentimental",
+        "Gentle"
+      ],
+      "quote": "Once I was a real Turtle.",
+      "firstAppears": 9,
+      "description": "Weeps steadily through an account of a school where the lessons lessen by a day each day. The Gryphon insists he has no sorrow at all. Both things appear to be true.",
+      "anchors": [
+        "a calf's head on a turtle's body — Tenniel's joke, and the fixed design",
+        "calf's hooves for forefeet and a long calf's tail",
+        "large mournful eyes, permanently brimming",
+        "green-brown shell over soft ochre hide"
+      ],
+      "voice": {
+        "direction": "Heavy and sighing, on the edge of tears from the first word.",
+        "age": "ageless",
+        "accent": "doleful English"
+      }
+    }
+  ],
+  "locations": [
+    {
+      "id": "rabbit-hole",
+      "name": "The Rabbit Hole",
+      "caption": "Down we go...",
+      "firstAppears": 1,
+      "description": "A vertical fall past shelves, clocks, maps and jars, lit by a distant gold aperture far above.",
+      "prompt": "girl falling slowly down an endless circular shaft lined with bookshelves, mantel clocks, hanging lanterns and preserve jars, warm gold light from the opening far above, dust and playing cards drifting, painterly anime-influenced, cinematic"
+    },
+    {
+      "id": "wonderland-forest",
+      "name": "Wonderland Forest",
+      "caption": "Strange turns ahead.",
+      "firstAppears": 3,
+      "description": "Giant luminous mushrooms and crooked paths that rearrange when you look away.",
+      "prompt": "dense twilight forest of giant glowing mushrooms in violet and teal, crooked signposts pointing in contradictory directions, bioluminescent spores, fog, painterly anime-influenced, magical realism"
+    },
+    {
+      "id": "cheshire-tree",
+      "name": "The Cheshire Tree",
+      "caption": "Appear. Disappear. Always near.",
+      "firstAppears": 6,
+      "description": "A vast gnarled tree whose canopy holds a grin whether or not the cat is in it.",
+      "prompt": "enormous gnarled ancient tree at night, violet glowing grin and luminous eyes floating in the dark canopy, twisting branches, starfield behind, painterly anime-influenced, eerie but not frightening"
+    },
+    {
+      "id": "tea-party",
+      "name": "The Tea Party",
+      "caption": "A very merry unbirthday.",
+      "firstAppears": 7,
+      "description": "An impossibly long table under paper lanterns, set for far more guests than ever arrive.",
+      "prompt": "impossibly long outdoor tea table under strings of paper lanterns at dusk, mismatched porcelain, stacked teacups, empty chairs receding into fog, painterly anime-influenced, warm candlelight against violet night"
+    },
+    {
+      "id": "queens-garden",
+      "name": "The Queen's Garden",
+      "caption": "Beautiful, but be careful.",
+      "firstAppears": 8,
+      "description": "Manicured hedges, white roses being hurriedly painted red, card guards at every corner.",
+      "prompt": "formal topiary garden at dusk with heart-shaped hedge arch, white roses half painted crimson, dripping paint, card-soldier guards at attention, distant castle, painterly anime-influenced"
+    },
+    {
+      "id": "croquet-ground",
+      "name": "The Croquet Ground",
+      "caption": "A curious game indeed.",
+      "firstAppears": 8,
+      "description": "A lawn where the mallets object to being swung and the rules change to suit whoever is losing.",
+      "prompt": "croquet lawn at dusk, flamingo mallets, hedgehog balls mid-roll, card soldiers bent into hoops, players in Victorian dress, heart topiary, painterly anime-influenced, playful"
+    },
+    {
+      "id": "world-upside-down",
+      "name": "A World Upside Down",
+      "caption": "Nothing is as it seems.",
+      "firstAppears": 12,
+      "description": "The point where Wonderland stops pretending: floating islands, inverted horizons, falling cards.",
+      "prompt": "surreal inverted landscape, floating islands and castles suspended in a sunset-to-starfield sky, waterfalls falling upward, giant playing cards tumbling through cloud, painterly anime-influenced, awe"
+    }
+  ],
+  "objects": [
+    {
+      "id": "pocket-watch",
+      "name": "Pocket Watch",
+      "caption": "Time slips away.",
+      "firstAppears": 1,
+      "meaning": "The Rabbit's panic made portable. Time in Wonderland is something done to you."
+    },
+    {
+      "id": "drink-me",
+      "name": "Drink Me Bottle",
+      "caption": "Smaller?",
+      "firstAppears": 1,
+      "meaning": "The first thing Alice does here is change her own size on a stranger's instruction."
+    },
+    {
+      "id": "eat-me",
+      "name": "Eat Me Cake",
+      "caption": "Bigger?",
+      "firstAppears": 2,
+      "meaning": "Growing up, taken literally, and not obviously an improvement."
+    },
+    {
+      "id": "playing-cards",
+      "name": "Playing Cards",
+      "caption": "Rules are flexible.",
+      "firstAppears": 1,
+      "meaning": "An entire court that is, on inspection, made of paper."
+    },
+    {
+      "id": "tea-set",
+      "name": "Tea Set",
+      "caption": "Always tea time.",
+      "firstAppears": 7,
+      "meaning": "Ritual with the meaning worn off, repeated forever."
+    },
+    {
+      "id": "hatters-hat",
+      "name": "Mad Hatter's Hat",
+      "caption": "Curiosity included.",
+      "firstAppears": 7,
+      "meaning": "Still priced at 10/6. He never took the ticket off."
+    },
+    {
+      "id": "flamingo-mallet",
+      "name": "Flamingo Mallet",
+      "caption": "An unusual weapon.",
+      "firstAppears": 8,
+      "meaning": "A game where the equipment has opinions."
+    },
+    {
+      "id": "hedgehog-ball",
+      "name": "Hedgehog Ball",
+      "caption": "Mind the spikes.",
+      "firstAppears": 8,
+      "meaning": "Nothing in Wonderland consents to being used."
+    },
+    {
+      "id": "queens-crown",
+      "name": "Queen's Crown",
+      "caption": "Power can be fragile.",
+      "firstAppears": 8,
+      "meaning": "Heavy, gold, and resting on a woman nobody genuinely fears."
+    },
+    {
+      "id": "captured-butterfly",
+      "name": "Captured Butterfly",
+      "caption": "Even madness is beautiful.",
+      "firstAppears": 9,
+      "meaning": "Wonder pinned under glass. What Alice refuses to become."
+    }
+  ],
+  "sections": [
+    {
+      "index": 1,
+      "kind": "chapter",
+      "sourceRef": "Chapter I",
+      "editorialTitle": "Down the Rabbit-Hole",
+      "synopsis": "A dull riverbank, a rabbit with a waistcoat and a pocket watch, and a fall that goes on long enough to get bored in. Alice lands in a hall of locked doors.",
+      "mood": "Curiosity",
+      "act": "Act I — Falling",
+      "heroVisual": "Alice falling slowly past shelves, clocks and jars, lit by a gold aperture far above.",
+      "visualCompanion": [
+        {
+          "type": "character",
+          "brief": "The White Rabbit checking his watch",
+          "refId": "white-rabbit",
+          "title": "White Rabbit"
+        },
+        {
+          "type": "location",
+          "brief": "The vertical fall",
+          "refId": "rabbit-hole",
+          "title": "The Rabbit Hole"
+        },
+        {
+          "type": "object",
+          "brief": "The little gold key and the tiny door",
+          "refId": "pocket-watch",
+          "title": "Pocket Watch"
+        },
+        {
+          "type": "object",
+          "brief": "The bottle labelled DRINK ME",
+          "refId": "drink-me",
+          "title": "Drink Me Bottle"
+        },
+        {
+          "type": "scene",
+          "title": "On the Riverbank",
+          "brief": "A hot, dull afternoon on the riverbank, Alice bored beside her reading sister, and a waistcoated rabbit hurrying past as though he were late.",
+          "tags": [
+            "Key Moment"
+          ],
+          "spoilerLevel": 1,
+          "unlockAt": 0.08,
+          "anchorQuote": "Alice was beginning to get very tired"
+        },
+        {
+          "type": "scene",
+          "title": "The Long Fall",
+          "brief": "Alice falling slowly past shelves, mantel clocks and preserve jars, the gold aperture shrinking far above her.",
+          "locationId": "rabbit-hole",
+          "tags": [
+            "Key Moment"
+          ],
+          "spoilerLevel": 1,
+          "unlockAt": 0.4,
+          "anchorQuote": "Either the well was very deep"
+        },
+        {
+          "type": "scene",
+          "title": "The Hall of Doors",
+          "brief": "A low hall ringed with locked doors, a glass table, and a key too small for any of them.",
+          "tags": [
+            "Location"
+          ],
+          "spoilerLevel": 1,
+          "unlockAt": 0.82,
+          "anchorQuote": "she found herself in a long, low hall"
+        }
+      ],
+      "estimatedMinutes": 12
+    },
+    {
+      "index": 2,
+      "kind": "chapter",
+      "sourceRef": "Chapter II",
+      "editorialTitle": "The Pool of Tears",
+      "synopsis": "Alice changes size twice, cries a pool, and then has to swim it alongside a mouse who objects to her conversation.",
+      "mood": "Bewilderment",
+      "act": "Act I — Falling",
+      "heroVisual": "Alice adrift in her own tears with a mouse swimming stiffly away from her.",
+      "visualCompanion": [
+        {
+          "type": "object",
+          "brief": "The cake marked EAT ME",
+          "refId": "eat-me",
+          "title": "Eat Me Cake"
+        },
+        {
+          "type": "scene",
+          "brief": "The pool, with Alice enormous and then very small",
+          "title": "Too Large, Then Too Small",
+          "unlockAt": 0.5,
+          "anchorQuote": "shedding gallons of tears",
+          "tags": [
+            "Key Moment"
+          ],
+          "spoilerLevel": 2
+        },
+        {
+          "type": "scene",
+          "title": "Her Own Tears",
+          "brief": "Alice adrift in the pool she cried at nine feet tall, a mouse swimming stiffly away from her.",
+          "tags": [
+            "Key Moment"
+          ],
+          "spoilerLevel": 2,
+          "unlockAt": 0.82,
+          "anchorQuote": "up to her chin in salt water"
+        }
+      ],
+      "estimatedMinutes": 12
+    },
+    {
+      "index": 3,
+      "kind": "chapter",
+      "sourceRef": "Chapter III",
+      "editorialTitle": "A Caucus-Race and a Long Tale",
+      "synopsis": "A race with no start, no finish and prizes for everybody, followed by a story Alice manages to insult her way out of.",
+      "mood": "Absurd sociability",
+      "act": "Act I — Falling",
+      "heroVisual": "A ring of bedraggled animals running in no particular direction.",
+      "visualCompanion": [
+        {
+          "type": "location",
+          "brief": "The shore of the pool",
+          "refId": "wonderland-forest",
+          "title": "Wonderland Forest"
+        },
+        {
+          "type": "scene",
+          "title": "The Caucus-Race",
+          "brief": "A ring of bedraggled birds and animals running in no particular direction, on the shore of the pool.",
+          "locationId": "wonderland-forest",
+          "tags": [
+            "Key Moment"
+          ],
+          "spoilerLevel": 3,
+          "unlockAt": 0.45,
+          "anchorQuote": "they began running when they liked"
+        }
+      ],
+      "estimatedMinutes": 12
+    },
+    {
+      "index": 4,
+      "kind": "chapter",
+      "sourceRef": "Chapter IV",
+      "editorialTitle": "The Rabbit Sends in a Little Bill",
+      "synopsis": "Mistaken for a housemaid, Alice is sent for gloves, outgrows the house she is standing in, and is pelted with pebbles that turn into cakes.",
+      "mood": "Farce",
+      "act": "Act I — Falling",
+      "heroVisual": "A cottage with an arm out of one window and a foot up the chimney.",
+      "visualCompanion": [
+        {
+          "type": "character",
+          "brief": "Bill the Lizard, going up the chimney",
+          "refId": "white-rabbit",
+          "title": "White Rabbit"
+        },
+        {
+          "type": "scene",
+          "title": "Too Big for the House",
+          "brief": "A cottage with Alice's arm out of one window and a foot jammed up the chimney, the garden crowded with onlookers.",
+          "tags": [
+            "Key Moment"
+          ],
+          "spoilerLevel": 4,
+          "unlockAt": 0.5,
+          "anchorQuote": "she put one arm out of the window"
+        }
+      ],
+      "estimatedMinutes": 12
+    },
+    {
+      "index": 5,
+      "kind": "chapter",
+      "sourceRef": "Chapter V",
+      "editorialTitle": "Advice from a Caterpillar",
+      "synopsis": "A blue caterpillar on a mushroom asks Alice who she is. She finds she cannot answer. He is unhelpful about it on purpose, then tells her which side of the mushroom to eat.",
+      "mood": "The real question",
+      "act": "Act II — Wandering",
+      "heroVisual": "The Caterpillar coiled on the mushroom cap, smoke curling into shapes.",
+      "visualCompanion": [
+        {
+          "type": "character",
+          "brief": "The Caterpillar",
+          "refId": "caterpillar",
+          "title": "Caterpillar"
+        },
+        {
+          "type": "location",
+          "brief": "The mushroom clearing",
+          "refId": "wonderland-forest",
+          "title": "Wonderland Forest"
+        },
+        {
+          "type": "scene",
+          "title": "Who Are You?",
+          "brief": "The Caterpillar coiled on the mushroom cap at eye level, hookah smoke curling into the shape of the question.",
+          "locationId": "wonderland-forest",
+          "tags": [
+            "Character",
+            "Key Moment"
+          ],
+          "spoilerLevel": 5,
+          "unlockAt": 0.3,
+          "anchorQuote": "The Caterpillar and Alice looked at each other"
+        },
+        {
+          "type": "scene",
+          "title": "The Serpent",
+          "brief": "Alice’s neck grown impossibly long among the treetops, a pigeon beating its wings at her in fury.",
+          "tags": [
+            "Key Moment"
+          ],
+          "spoilerLevel": 5,
+          "unlockAt": 0.78,
+          "anchorQuote": "a large pigeon had flown into her face"
+        }
+      ],
+      "estimatedMinutes": 12
+    },
+    {
+      "index": 6,
+      "kind": "chapter",
+      "sourceRef": "Chapter VI",
+      "editorialTitle": "Pig and Pepper",
+      "synopsis": "A kitchen full of pepper, a Duchess, a baby that turns out not to be one, and the first grin in the trees.",
+      "mood": "Chaos into strangeness",
+      "act": "Act II — Wandering",
+      "heroVisual": "The Cheshire Cat's grin arriving in the canopy before the rest of him.",
+      "visualCompanion": [
+        {
+          "type": "character",
+          "brief": "The Cheshire Cat",
+          "refId": "cheshire-cat",
+          "title": "Cheshire Cat"
+        },
+        {
+          "type": "location",
+          "brief": "The Cheshire tree",
+          "refId": "cheshire-tree",
+          "title": "The Cheshire Tree"
+        },
+        {
+          "type": "scene",
+          "title": "The Pepper Kitchen",
+          "brief": "The Duchess’s kitchen thick with pepper, crockery in the air, nobody troubled by any of it.",
+          "tags": [
+            "Location"
+          ],
+          "spoilerLevel": 6,
+          "unlockAt": 0.3,
+          "anchorQuote": "The door led right into a large kitchen"
+        },
+        {
+          "type": "scene",
+          "title": "The Grin in the Canopy",
+          "brief": "The Cheshire Cat fading tail-first in the branches, the grin left hanging behind him.",
+          "locationId": "cheshire-tree",
+          "tags": [
+            "Character",
+            "Key Moment"
+          ],
+          "spoilerLevel": 6,
+          "unlockAt": 0.8,
+          "anchorQuote": "this time it vanished quite slowly"
+        }
+      ],
+      "estimatedMinutes": 12
+    },
+    {
+      "index": 7,
+      "kind": "chapter",
+      "sourceRef": "Chapter VII",
+      "editorialTitle": "A Mad Tea-Party",
+      "synopsis": "Six o'clock forever. Riddles with no answers, a dormouse in a teapot, and the rudest hospitality Alice has ever received.",
+      "mood": "Delightful exasperation",
+      "act": "Act II — Wandering",
+      "heroVisual": "The impossibly long table under paper lanterns, three guests at one end.",
+      "visualCompanion": [
+        {
+          "type": "character",
+          "brief": "The Mad Hatter",
+          "refId": "mad-hatter",
+          "title": "Mad Hatter"
+        },
+        {
+          "type": "character",
+          "brief": "The March Hare",
+          "refId": "march-hare",
+          "title": "March Hare"
+        },
+        {
+          "type": "character",
+          "brief": "The Dormouse",
+          "refId": "dormouse",
+          "title": "Dormouse"
+        },
+        {
+          "type": "location",
+          "brief": "The tea party",
+          "refId": "tea-party",
+          "title": "The Tea Party"
+        },
+        {
+          "type": "object",
+          "brief": "The Hatter's hat, still priced",
+          "refId": "hatters-hat",
+          "title": "Mad Hatter's Hat"
+        },
+        {
+          "type": "scene",
+          "title": "Six O'Clock Forever",
+          "brief": "The impossibly long table under paper lanterns, three guests crowded together at one end of it.",
+          "locationId": "tea-party",
+          "tags": [
+            "Location",
+            "Key Moment"
+          ],
+          "spoilerLevel": 7,
+          "unlockAt": 0.28,
+          "anchorQuote": "a table set out under a tree"
+        },
+        {
+          "type": "scene",
+          "title": "The Dormouse in the Teapot",
+          "brief": "The Dormouse being folded into the teapot, the riddle still unanswered on the table.",
+          "locationId": "tea-party",
+          "tags": [
+            "Character"
+          ],
+          "spoilerLevel": 7,
+          "unlockAt": 0.75,
+          "anchorQuote": "trying to put the Dormouse into the teapot"
+        }
+      ],
+      "estimatedMinutes": 12
+    },
+    {
+      "index": 8,
+      "kind": "chapter",
+      "sourceRef": "Chapter VIII",
+      "editorialTitle": "The Queen's Croquet-Ground",
+      "synopsis": "White roses being hurriedly painted red, flamingo mallets, hedgehog balls, and a queen who sentences everyone she meets.",
+      "mood": "Menace, played for laughs",
+      "act": "Act III — The Court",
+      "heroVisual": "Gardeners painting roses red as the royal procession rounds the hedge.",
+      "visualCompanion": [
+        {
+          "type": "character",
+          "brief": "The Queen of Hearts",
+          "refId": "queen-of-hearts",
+          "title": "Queen of Hearts"
+        },
+        {
+          "type": "character",
+          "brief": "The King of Hearts",
+          "refId": "king-of-hearts",
+          "title": "King of Hearts"
+        },
+        {
+          "type": "location",
+          "brief": "The Queen's garden",
+          "refId": "queens-garden",
+          "title": "The Queen's Garden"
+        },
+        {
+          "type": "location",
+          "brief": "The croquet ground",
+          "refId": "croquet-ground",
+          "title": "The Croquet Ground"
+        },
+        {
+          "type": "object",
+          "brief": "The flamingo mallet",
+          "refId": "flamingo-mallet",
+          "title": "Flamingo Mallet"
+        },
+        {
+          "type": "object",
+          "brief": "The hedgehog ball",
+          "refId": "hedgehog-ball",
+          "title": "Hedgehog Ball"
+        },
+        {
+          "type": "scene",
+          "title": "Painting the Roses Red",
+          "brief": "Card gardeners hurriedly painting white roses crimson, the paint running down the stems.",
+          "locationId": "queens-garden",
+          "tags": [
+            "Key Moment"
+          ],
+          "spoilerLevel": 8,
+          "unlockAt": 0.22,
+          "anchorQuote": "A large rose-tree stood near the entrance"
+        },
+        {
+          "type": "scene",
+          "title": "A Curious Game",
+          "brief": "Flamingo mallets, hedgehog balls mid-roll, and card soldiers bent into hoops on the lawn.",
+          "locationId": "croquet-ground",
+          "tags": [
+            "Location",
+            "Key Moment"
+          ],
+          "spoilerLevel": 8,
+          "unlockAt": 0.7,
+          "anchorQuote": "never seen such a curious croquet-ground"
+        }
+      ],
+      "estimatedMinutes": 12
+    },
+    {
+      "index": 9,
+      "kind": "chapter",
+      "sourceRef": "Chapter IX",
+      "editorialTitle": "The Mock Turtle's Story",
+      "synopsis": "The Duchess finds a moral in everything. The Gryphon takes Alice to meet a Mock Turtle who weeps through an account of a school where the lessons lessen daily.",
+      "mood": "Melancholy nonsense",
+      "act": "Act III — The Court",
+      "heroVisual": "The Mock Turtle on the rocks at evening, sighing.",
+      "visualCompanion": [
+        {
+          "type": "location",
+          "brief": "The seashore",
+          "refId": "queens-garden",
+          "title": "The Queen's Garden"
+        },
+        {
+          "type": "character",
+          "refId": "gryphon",
+          "title": "The Gryphon",
+          "brief": "The Gryphon, asleep in the sun until the Queen sends him"
+        },
+        {
+          "type": "character",
+          "refId": "mock-turtle",
+          "title": "The Mock Turtle",
+          "brief": "The Mock Turtle on his rock, mid-sigh"
+        },
+        {
+          "type": "scene",
+          "title": "The Mock Turtle",
+          "brief": "The Mock Turtle weeping on the rocks at evening while the Gryphon, entirely unmoved, waits beside him.",
+          "tags": [
+            "Character"
+          ],
+          "spoilerLevel": 9,
+          "unlockAt": 0.6,
+          "anchorQuote": "saw the Mock Turtle in the distance"
+        }
+      ],
+      "estimatedMinutes": 12
+    },
+    {
+      "index": 10,
+      "kind": "chapter",
+      "sourceRef": "Chapter X",
+      "editorialTitle": "The Lobster-Quadrille",
+      "synopsis": "A dance explained at exhausting length and never satisfactorily performed, and a recitation that keeps coming out wrong.",
+      "mood": "Wistful silliness",
+      "act": "Act III — The Court",
+      "heroVisual": "The Gryphon and Mock Turtle dancing gravely on the sand.",
+      "estimatedMinutes": 12,
+      "visualCompanion": [
+        {
+          "type": "character",
+          "refId": "mock-turtle",
+          "title": "The Mock Turtle",
+          "brief": "The Mock Turtle explaining a dance nobody can follow"
+        },
+        {
+          "type": "character",
+          "refId": "gryphon",
+          "title": "The Gryphon",
+          "brief": "The Gryphon demonstrating, impatiently"
+        },
+        {
+          "type": "scene",
+          "title": "The Lobster-Quadrille",
+          "brief": "The Gryphon and the Mock Turtle dancing gravely on the sand, and not well.",
+          "tags": [
+            "Key Moment"
+          ],
+          "spoilerLevel": 10,
+          "unlockAt": 0.5,
+          "anchorQuote": "they began solemnly dancing round and round"
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "kind": "chapter",
+      "sourceRef": "Chapter XI",
+      "editorialTitle": "Who Stole the Tarts?",
+      "synopsis": "A trial where the sentence comes first and the evidence is invented as needed. The Hatter gives testimony badly.",
+      "mood": "Injustice as comedy",
+      "act": "Act III — The Court",
+      "heroVisual": "The court in session, the tarts on a table in the middle of the floor.",
+      "visualCompanion": [
+        {
+          "type": "object",
+          "brief": "The stolen tarts",
+          "refId": "playing-cards",
+          "title": "Playing Cards"
+        },
+        {
+          "type": "character",
+          "brief": "The Hatter in the witness box",
+          "refId": "mad-hatter",
+          "title": "Mad Hatter"
+        },
+        {
+          "type": "scene",
+          "title": "The Court in Session",
+          "brief": "The King on the bench, a jury of animals scribbling, and the stolen tarts on a table in the middle of the floor.",
+          "tags": [
+            "Key Moment"
+          ],
+          "spoilerLevel": 11,
+          "unlockAt": 0.45,
+          "anchorQuote": "The King and Queen of Hearts were seated"
+        }
+      ],
+      "estimatedMinutes": 12
+    },
+    {
+      "index": 12,
+      "kind": "chapter",
+      "sourceRef": "Chapter XII",
+      "editorialTitle": "Alice's Evidence",
+      "synopsis": "Alice grows, stands up, says exactly what she thinks of all of them, and the whole court turns out to be nothing but a pack of cards.",
+      "mood": "Release",
+      "act": "Act III — The Court",
+      "heroVisual": "The cards flying up into the air around her as everything comes apart.",
+      "visualCompanion": [
+        {
+          "type": "location",
+          "brief": "A world upside down",
+          "refId": "world-upside-down",
+          "title": "A World Upside Down"
+        },
+        {
+          "type": "object",
+          "brief": "The Queen's crown, falling",
+          "refId": "queens-crown",
+          "title": "Queen's Crown"
+        },
+        {
+          "type": "scene",
+          "title": "Nothing but a Pack of Cards",
+          "brief": "The whole court flying up into the air as flat painted cards, Alice standing full height among them.",
+          "locationId": "world-upside-down",
+          "tags": [
+            "Key Moment"
+          ],
+          "spoilerLevel": 12,
+          "unlockAt": 0.62,
+          "anchorQuote": "the whole pack rose up into the air"
+        },
+        {
+          "type": "scene",
+          "title": "Waking on the Bank",
+          "brief": "Alice awake on the riverbank in ordinary afternoon light, her sister beside her, nothing strange anywhere.",
+          "tags": [
+            "Key Moment"
+          ],
+          "spoilerLevel": 12,
+          "unlockAt": 0.92,
+          "anchorQuote": "found herself lying on the bank"
+        }
+      ],
+      "estimatedMinutes": 13
+    }
+  ],
+  "audio": {
+    "narration": "Single narrator, warm and close, with light character colouring rather than full impressions.",
+    "tone": "Playful and dry. Let the nonsense land flat and trust it to be funny.",
+    "score": "Sparse music box and celeste, wide reverb, no percussion. Drops out entirely under the Caterpillar.",
+    "atmosphere": [
+      "distant clock ticking",
+      "teacups and saucers",
+      "rustling cards",
+      "wind through leaves"
+    ],
+    "sleepTimerFriendly": true
+  },
+  "type": "novel"
+}
