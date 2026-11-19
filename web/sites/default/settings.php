@@ -924,6 +924,14 @@ $settings['config_sync_directory'] = '../config/sync';
 // Where the Imagine content is mounted (read-only) for the migrations.
 $settings['imagine_source_dir'] = '/srv/imagine-source';
 
+// The demo imports only Alice (English original, French and German
+// translations), even when the full Imagine content folder is mounted.
+$settings['imagine_book_ids'] = [
+  'alice-in-wonderland',
+  'alice-au-pays-des-merveilles',
+  'alice-im-wunderland',
+];
+
 /**
  * Load local development override configuration, if available.
  *

@@ -8,7 +8,7 @@ namespace Drupal\imagine_migrate\Plugin\migrate\source;
  * One row per book, read from classics/<book>/bible.json.
  *
  * Configuration:
- * - translations: FALSE (default) for original-language books, TRUE for
+ * - translated: FALSE (default) for original-language books, TRUE for
  *   translations. Originals must be imported first so translations can
  *   look up the node they belong to.
  *
@@ -16,7 +16,7 @@ namespace Drupal\imagine_migrate\Plugin\migrate\source;
  * @code
  * source:
  *   plugin: imagine_bible
- *   translations: true
+ *   translated: true
  *   book_ids: [alice-au-pays-des-merveilles, alice-im-wunderland]
  * @endcode
  *
@@ -31,7 +31,7 @@ final class ImagineBible extends ImagineSourceBase {
    * {@inheritdoc}
    */
   protected function initializeIterator(): \Iterator {
-    $translations = (bool) ($this->configuration['translations'] ?? FALSE);
+    $translations = (bool) ($this->configuration['translated'] ?? FALSE);
     $rows = [];
     foreach ($this->selectedBooks($translations) as $id => $bible) {
       $cover = $this->imagine()->assetPath($id, 'cover.webp');

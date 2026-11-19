@@ -1,0 +1,56 @@
+id: imagine_chapters
+label: 'Imagine: chapters (original language)'
+migration_group: imagine
+migration_tags:
+  - imagine
+source:
+  plugin: imagine_chapter
+  translated: false
+process:
+  langcode: language
+  title: editorial_title
+  field_book/target_id:
+    - plugin: migration_lookup
+      migration: imagine_books
+      source: book_id
+      no_stub: true
+    - plugin: skip_on_empty
+      method: row
+      message: 'The book was not imported, so this chapter was skipped.'
+  field_index: index
+  field_source_ref: source_ref
+  field_synopsis/value: synopsis
+  field_synopsis/format:
+    plugin: default_value
+    default_value: basic_html
+  field_mood: mood
+  field_act: act
+  body/value: body
+  body/format:
+    plugin: default_value
+    default_value: basic_html
+  field_narration/target_id:
+    plugin: migration_lookup
+    migration: imagine_media_narration
+    source: narration_asset_id
+    no_stub: true
+  # scene_asset_ids is a list, so the lookup runs once per item.
+  field_scenes:
+    plugin: migration_lookup
+    migration: imagine_media_scene
+    source: scene_asset_ids
+    no_stub: true
+  status:
+    plugin: default_value
+    default_value: 1
+  uid:
+    plugin: default_value
+    default_value: 1
+destination:
+  plugin: entity:node
+  default_bundle: chapter
+migration_dependencies:
+  required:
+    - imagine_books
+    - imagine_media_narration
+    - imagine_media_scene

@@ -1,0 +1,31 @@
+id: imagine_file_scene
+label: 'Imagine: scene files'
+migration_group: imagine
+migration_tags:
+  - imagine
+source:
+  plugin: imagine_asset
+  kind: scene
+  constants:
+    destination_base: 'public://imagine/'
+process:
+  destination_uri:
+    plugin: concat
+    source:
+      - constants/destination_base
+      - asset_id
+  uri:
+    plugin: file_copy
+    source:
+      - path
+      - '@destination_uri'
+    file_exists: replace
+  filename: filename
+  status:
+    plugin: default_value
+    default_value: 1
+  uid:
+    plugin: default_value
+    default_value: 1
+destination:
+  plugin: entity:file

@@ -59,14 +59,14 @@ final class ImagineSourceTest extends KernelTestBase {
    * Originals and translations come out of separate passes.
    */
   public function testBooksSplitByTranslation(): void {
-    $originals = $this->rows(['plugin' => 'imagine_bible', 'translations' => FALSE]);
+    $originals = $this->rows(['plugin' => 'imagine_bible', 'translated' => FALSE]);
     $this->assertSame(['alice-in-wonderland'], array_column($originals, 'id'));
     $this->assertNull($originals[0]['translation_of']);
     $this->assertSame('Lewis Carroll', $originals[0]['author']);
     $this->assertSame(1865, $originals[0]['first_published']);
     $this->assertSame('alice-in-wonderland/cover.webp', $originals[0]['cover_asset_id']);
 
-    $translations = $this->rows(['plugin' => 'imagine_bible', 'translations' => TRUE]);
+    $translations = $this->rows(['plugin' => 'imagine_bible', 'translated' => TRUE]);
     $this->assertSame(['alice-au-pays-des-merveilles'], array_column($translations, 'id'));
     $this->assertSame('alice-in-wonderland', $translations[0]['translation_of']);
     $this->assertSame('fr', $translations[0]['language']);
@@ -79,10 +79,27 @@ final class ImagineSourceTest extends KernelTestBase {
   public function testBookIdsFilter(): void {
     $rows = $this->rows([
       'plugin' => 'imagine_bible',
-      'translations' => TRUE,
+      'translated' => TRUE,
       'book_ids' => ['some-other-book'],
     ]);
     $this->assertSame([], $rows);
+  }
+
+  /**
+   * Without book_ids, the imagine_book_ids setting limits the books.
+   */
+  public function testBookIdsFallBackToSetting(): void {
+    $this->setSetting('imagine_book_ids', ['alice-in-wonderland']);
+    $this->assertSame([], $this->rows(['plugin' => 'imagine_bible', 'translated' => TRUE]));
+    $this->assertCount(1, $this->rows(['plugin' => 'imagine_bible', 'translated' => FALSE]));
+
+    // An explicit book_ids list wins over the setting.
+    $rows = $this->rows([
+      'plugin' => 'imagine_bible',
+      'translated' => TRUE,
+      'book_ids' => ['alice-au-pays-des-merveilles'],
+    ]);
+    $this->assertSame(['alice-au-pays-des-merveilles'], array_column($rows, 'id'));
   }
 
   /**
@@ -127,7 +144,7 @@ final class ImagineSourceTest extends KernelTestBase {
    * An English chapter row combines the bible section and the text.
    */
   public function testChapterRowsJoinTextAndBible(): void {
-    $rows = $this->rows(['plugin' => 'imagine_chapter', 'translations' => FALSE]);
+    $rows = $this->rows(['plugin' => 'imagine_chapter', 'translated' => FALSE]);
     $row = $rows[0];
 
     $this->assertSame('alice-in-wonderland', $row['book_id']);
@@ -150,7 +167,7 @@ final class ImagineSourceTest extends KernelTestBase {
    * Paragraph text is HTML-escaped before it is wrapped in <p>.
    */
   public function testChapterBodyIsEscaped(): void {
-    $rows = $this->rows(['plugin' => 'imagine_chapter', 'translations' => TRUE]);
+    $rows = $this->rows(['plugin' => 'imagine_chapter', 'translated' => TRUE]);
     // "s'ennuyer" in the first French paragraph: the apostrophe is escaped.
     $this->assertStringContainsString('commençait à s&#039;ennuyer', $rows[0]['body']);
     $this->assertSame(2, substr_count($rows[0]['body'], '<p>'));
@@ -160,7 +177,7 @@ final class ImagineSourceTest extends KernelTestBase {
    * French chapters point at the English scenes; missing media stays empty.
    */
   public function testTranslatedChapterUsesOriginalScenes(): void {
-    $rows = $this->rows(['plugin' => 'imagine_chapter', 'translations' => TRUE]);
+    $rows = $this->rows(['plugin' => 'imagine_chapter', 'translated' => TRUE]);
     $this->assertSame([1, 2], array_column($rows, 'index'));
 
     [$one, $two] = $rows;
@@ -183,7 +200,7 @@ final class ImagineSourceTest extends KernelTestBase {
    * English chapter 2 is in the bible but has no text, so it has no row.
    */
   public function testChapterWithoutTextIsSkipped(): void {
-    $rows = $this->rows(['plugin' => 'imagine_chapter', 'translations' => FALSE]);
+    $rows = $this->rows(['plugin' => 'imagine_chapter', 'translated' => FALSE]);
     $this->assertSame([1], array_column($rows, 'index'));
   }
 

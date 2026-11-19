@@ -1,0 +1,52 @@
+# Each translated edition becomes a translation of the original book's node,
+# not a node of its own. Shared (untranslatable) fields are left alone.
+id: imagine_book_translations
+label: 'Imagine: book translations'
+migration_group: imagine
+migration_tags:
+  - imagine
+source:
+  plugin: imagine_bible
+  translated: true
+process:
+  nid:
+    - plugin: migration_lookup
+      migration: imagine_books
+      source: translation_of
+      no_stub: true
+    - plugin: skip_on_empty
+      method: row
+      message: 'The original book was not imported, so this translation was skipped.'
+  langcode: language
+  content_translation_source:
+    plugin: default_value
+    default_value: en
+  title: title
+  field_author: author
+  field_first_published: first_published
+  field_translator: translator
+  field_source_edition: source_edition
+  field_source_url/uri: source_url
+  field_description/value: description
+  field_description/format:
+    plugin: default_value
+    default_value: basic_html
+  field_cover/target_id:
+    plugin: migration_lookup
+    migration: imagine_media_cover
+    source: cover_asset_id
+    no_stub: true
+  status:
+    plugin: default_value
+    default_value: 1
+  uid:
+    plugin: default_value
+    default_value: 1
+destination:
+  plugin: entity:node
+  default_bundle: book
+  translations: true
+migration_dependencies:
+  required:
+    - imagine_books
+    - imagine_media_cover

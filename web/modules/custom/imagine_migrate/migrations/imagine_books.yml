@@ -1,0 +1,37 @@
+id: imagine_books
+label: 'Imagine: books (original language)'
+migration_group: imagine
+migration_tags:
+  - imagine
+source:
+  plugin: imagine_bible
+  translated: false
+process:
+  langcode: language
+  title: title
+  field_author: author
+  field_first_published: first_published
+  field_translator: translator
+  field_source_edition: source_edition
+  field_source_url/uri: source_url
+  field_description/value: description
+  field_description/format:
+    plugin: default_value
+    default_value: basic_html
+  field_cover/target_id:
+    plugin: migration_lookup
+    migration: imagine_media_cover
+    source: cover_asset_id
+    no_stub: true
+  status:
+    plugin: default_value
+    default_value: 1
+  uid:
+    plugin: default_value
+    default_value: 1
+destination:
+  plugin: entity:node
+  default_bundle: book
+migration_dependencies:
+  required:
+    - imagine_media_cover

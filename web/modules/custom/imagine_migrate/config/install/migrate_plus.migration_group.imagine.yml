@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - imagine_migrate
+id: imagine
+label: 'Imagine classics'
+description: 'Books, chapters, narration and artwork from the Imagine content folder.'
+source_type: 'Imagine JSON content folder'
+module: null
+shared_configuration: null

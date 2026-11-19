@@ -1,0 +1,35 @@
+id: imagine_media_scene
+label: 'Imagine: scene media'
+migration_group: imagine
+migration_tags:
+  - imagine
+source:
+  plugin: imagine_asset
+  kind: scene
+  constants:
+    alt_prefix: 'Illustration for chapter '
+process:
+  name: asset_id
+  langcode: language
+  field_media_image/target_id:
+    plugin: migration_lookup
+    migration: imagine_file_scene
+    source: asset_id
+    no_stub: true
+  field_media_image/alt:
+    plugin: concat
+    source:
+      - constants/alt_prefix
+      - chapter_index
+  status:
+    plugin: default_value
+    default_value: 1
+  uid:
+    plugin: default_value
+    default_value: 1
+destination:
+  plugin: entity:media
+  default_bundle: image
+migration_dependencies:
+  required:
+    - imagine_file_scene

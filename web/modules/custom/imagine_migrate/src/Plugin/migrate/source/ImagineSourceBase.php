@@ -15,7 +15,8 @@ use Drupal\migrate\Plugin\migrate\source\SourcePluginBase;
  * Configuration common to all of them:
  * - source_dir: (optional) content folder; defaults to the
  *   'imagine_source_dir' setting from settings.php.
- * - book_ids: (optional) only read these books.
+ * - book_ids: (optional) only read these books; defaults to the
+ *   'imagine_book_ids' setting from settings.php, else every book.
  */
 abstract class ImagineSourceBase extends SourcePluginBase {
 
@@ -42,7 +43,7 @@ abstract class ImagineSourceBase extends SourcePluginBase {
   }
 
   /**
-   * Returns the books to read, after the optional book_ids filter.
+   * Returns the books to read, after the book_ids filter.
    *
    * @param bool|null $translations
    *   TRUE for translations only, FALSE for originals only, NULL for both.
@@ -52,8 +53,9 @@ abstract class ImagineSourceBase extends SourcePluginBase {
    */
   protected function selectedBooks(?bool $translations = NULL): array {
     $books = $this->imagine()->books();
-    if (isset($this->configuration['book_ids'])) {
-      $books = array_intersect_key($books, array_flip($this->configuration['book_ids']));
+    $bookIds = $this->configuration['book_ids'] ?? Settings::get('imagine_book_ids');
+    if (isset($bookIds)) {
+      $books = array_intersect_key($books, array_flip($bookIds));
     }
     if ($translations !== NULL) {
       $books = array_filter($books, fn(array $bible) => isset($bible['translationOf']) === $translations);

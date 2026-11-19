@@ -1,0 +1,57 @@
+# Each translated chapter becomes a translation of the original chapter's
+# node, found by (original book id, chapter index). Book, index and scenes
+# are shared fields, so they are not set here.
+id: imagine_chapter_translations
+label: 'Imagine: chapter translations'
+migration_group: imagine
+migration_tags:
+  - imagine
+source:
+  plugin: imagine_chapter
+  translated: true
+process:
+  nid:
+    - plugin: migration_lookup
+      migration: imagine_chapters
+      source:
+        - translation_of
+        - index
+      no_stub: true
+    - plugin: skip_on_empty
+      method: row
+      message: 'The original chapter was not imported, so this translation was skipped.'
+  langcode: language
+  content_translation_source:
+    plugin: default_value
+    default_value: en
+  title: editorial_title
+  field_source_ref: source_ref
+  field_synopsis/value: synopsis
+  field_synopsis/format:
+    plugin: default_value
+    default_value: basic_html
+  field_mood: mood
+  field_act: act
+  body/value: body
+  body/format:
+    plugin: default_value
+    default_value: basic_html
+  field_narration/target_id:
+    plugin: migration_lookup
+    migration: imagine_media_narration
+    source: narration_asset_id
+    no_stub: true
+  status:
+    plugin: default_value
+    default_value: 1
+  uid:
+    plugin: default_value
+    default_value: 1
+destination:
+  plugin: entity:node
+  default_bundle: chapter
+  translations: true
+migration_dependencies:
+  required:
+    - imagine_chapters
+    - imagine_media_narration

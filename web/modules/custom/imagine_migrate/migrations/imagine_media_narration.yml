@@ -1,0 +1,28 @@
+id: imagine_media_narration
+label: 'Imagine: narration media'
+migration_group: imagine
+migration_tags:
+  - imagine
+source:
+  plugin: imagine_asset
+  kind: narration
+process:
+  name: asset_id
+  langcode: language
+  field_media_audio_file/target_id:
+    plugin: migration_lookup
+    migration: imagine_file_narration
+    source: asset_id
+    no_stub: true
+  status:
+    plugin: default_value
+    default_value: 1
+  uid:
+    plugin: default_value
+    default_value: 1
+destination:
+  plugin: entity:media
+  default_bundle: audio
+migration_dependencies:
+  required:
+    - imagine_file_narration

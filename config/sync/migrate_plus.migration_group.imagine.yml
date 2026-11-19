@@ -1,0 +1,15 @@
+uuid: f15a0c0f-6fbf-40a6-9157-b6f72a66616b
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - imagine_migrate
+_core:
+  default_config_hash: O4srFKE_pvoKjk8kt1xXbjMsh2jX-U450-V4AbQBYG4
+id: imagine
+label: 'Imagine classics'
+description: 'Books, chapters, narration and artwork from the Imagine content folder.'
+source_type: 'Imagine JSON content folder'
+module: null
+shared_configuration: null
