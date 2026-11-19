@@ -123,4 +123,68 @@ final class ImagineSourceTest extends KernelTestBase {
     $this->assertNull($rows[0]['chapter_index']);
   }
 
+  /**
+   * An English chapter row combines the bible section and the text.
+   */
+  public function testChapterRowsJoinTextAndBible(): void {
+    $rows = $this->rows(['plugin' => 'imagine_chapter', 'translations' => FALSE]);
+    $row = $rows[0];
+
+    $this->assertSame('alice-in-wonderland', $row['book_id']);
+    $this->assertSame(1, $row['index']);
+    $this->assertSame('en', $row['language']);
+    $this->assertNull($row['translation_of']);
+    $this->assertSame('Down the Rabbit-Hole', $row['editorial_title']);
+    $this->assertSame('Chapter I', $row['source_ref']);
+    $this->assertSame('Curiosity', $row['mood']);
+    $this->assertStringStartsWith('<p>Alice was beginning to get very tired', $row['body']);
+    $this->assertStringEndsWith('</p>', $row['body']);
+    $this->assertSame('alice-in-wonderland/narration/1.mp3', $row['narration_asset_id']);
+    $this->assertSame([
+      'alice-in-wonderland/scenes/1-0.webp',
+      'alice-in-wonderland/scenes/1-1.webp',
+    ], $row['scene_asset_ids']);
+  }
+
+  /**
+   * Paragraph text is HTML-escaped before it is wrapped in <p>.
+   */
+  public function testChapterBodyIsEscaped(): void {
+    $rows = $this->rows(['plugin' => 'imagine_chapter', 'translations' => TRUE]);
+    // "s'ennuyer" in the first French paragraph: the apostrophe is escaped.
+    $this->assertStringContainsString('commençait à s&#039;ennuyer', $rows[0]['body']);
+    $this->assertSame(2, substr_count($rows[0]['body'], '<p>'));
+  }
+
+  /**
+   * French chapters point at the English scenes; missing media stays empty.
+   */
+  public function testTranslatedChapterUsesOriginalScenes(): void {
+    $rows = $this->rows(['plugin' => 'imagine_chapter', 'translations' => TRUE]);
+    $this->assertSame([1, 2], array_column($rows, 'index'));
+
+    [$one, $two] = $rows;
+    $this->assertSame('alice-au-pays-des-merveilles', $one['book_id']);
+    $this->assertSame('alice-in-wonderland', $one['translation_of']);
+    $this->assertSame('fr', $one['language']);
+    $this->assertSame('Au fond du terrier', $one['editorial_title']);
+    $this->assertSame('alice-au-pays-des-merveilles/narration/1.mp3', $one['narration_asset_id']);
+    $this->assertSame([
+      'alice-in-wonderland/scenes/1-0.webp',
+      'alice-in-wonderland/scenes/1-1.webp',
+    ], $one['scene_asset_ids']);
+
+    // Chapter 2 has no narration file and no scene images.
+    $this->assertNull($two['narration_asset_id']);
+    $this->assertSame([], $two['scene_asset_ids']);
+  }
+
+  /**
+   * English chapter 2 is in the bible but has no text, so it has no row.
+   */
+  public function testChapterWithoutTextIsSkipped(): void {
+    $rows = $this->rows(['plugin' => 'imagine_chapter', 'translations' => FALSE]);
+    $this->assertSame([1], array_column($rows, 'index'));
+  }
+
 }
