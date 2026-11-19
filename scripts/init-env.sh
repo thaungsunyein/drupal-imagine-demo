@@ -39,7 +39,7 @@ DB_USER=drupal
 DB_PASSWORD=$(openssl rand -hex 24)
 DB_ROOT_PASSWORD=$(openssl rand -hex 24)
 HASH_SALT=$(openssl rand -base64 48 | tr -d '\n=' | tr '+/' '-_')
-TRUSTED_HOSTS=^cms\.storyheroapp\.com\$
+TRUSTED_HOSTS='^cms\.storyheroapp\.com\$'
 IMAGINE_SOURCE=$SOURCE_DIR_REMOTE
 TLS_DIR=/etc/imagine/tls
 UID=$(id -u)
