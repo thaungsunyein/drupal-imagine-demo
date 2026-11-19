@@ -21,6 +21,9 @@ param prefix string = 'imagine-demo'
 @description('false = only network + storage, no public IP/NIC/VM. Lets backups storage exist while VM capacity is pending; re-run with true to add the VM.')
 param deployVm bool = true
 
+@description('true once the VM exists. Azure only accepts cloud-init (customData) when a VM is created and rejects any change later, so redeploys leave it out.')
+param vmExists bool = false
+
 @description('VM size. 2 vCPU / 4 GB (B2s, B2als_v2) is enough for nginx + php-fpm + MariaDB.')
 param vmSize string = 'Standard_B2s'
 
@@ -157,6 +160,8 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-07-01' = if (deployVm) {
   name: vmName
   location: vmLocation
   zones: empty(zone) ? null : [ zone ]
+  // Lets the VM's daily backup (systemd timer) upload with azcopy without any stored secret.
+  identity: { type: 'SystemAssigned' }
   properties: {
     hardwareProfile: { vmSize: vmSize }
     securityProfile: {
@@ -166,7 +171,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-07-01' = if (deployVm) {
     osProfile: {
       computerName: vmName
       adminUsername: adminUsername
-      customData: base64(loadTextContent('cloud-init.yaml'))
+      customData: vmExists ? null : base64(loadTextContent('cloud-init.yaml'))
       linuxConfiguration: {
         disablePasswordAuthentication: true
         ssh: {
@@ -276,6 +281,17 @@ resource backupOperatorRole 'Microsoft.Authorization/roleAssignments@2022-04-01'
   properties: {
     principalId: backupOperatorPrincipalId
     principalType: 'User'
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', blobDataContributorRoleId)
+  }
+}
+
+// The VM may write to the backups container only (not the whole account).
+resource vmBackupRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (deployVm) {
+  name: guid(backupsContainer.id, vmName, blobDataContributorRoleId)
+  scope: backupsContainer
+  properties: {
+    principalId: vm!.identity.principalId
+    principalType: 'ServicePrincipal'
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', blobDataContributorRoleId)
   }
 }
