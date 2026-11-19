@@ -1,0 +1,23 @@
+uuid: be7b04be-6463-4870-b4f1-7c9d89ac309a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_first_published
+    - node.type.book
+id: node.book.field_first_published
+field_name: field_first_published
+entity_type: node
+bundle: book
+label: 'First Published'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

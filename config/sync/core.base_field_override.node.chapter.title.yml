@@ -1,0 +1,18 @@
+uuid: db5669af-e1ea-4dca-8a7e-d5732d53c328
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.chapter
+id: node.chapter.title
+field_name: title
+entity_type: node
+bundle: chapter
+label: 'Editorial title'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,47 @@
+uuid: 70f5e357-5af0-49d1-9826-4cdca46c3718
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.chapter.body
+    - field.field.node.chapter.field_act
+    - field.field.node.chapter.field_book
+    - field.field.node.chapter.field_index
+    - field.field.node.chapter.field_mood
+    - field.field.node.chapter.field_narration
+    - field.field.node.chapter.field_scenes
+    - field.field.node.chapter.field_source_ref
+    - field.field.node.chapter.field_synopsis
+    - node.type.chapter
+  module:
+    - text
+    - user
+id: node.chapter.teaser
+targetEntityType: node
+bundle: chapter
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_act: true
+  field_book: true
+  field_index: true
+  field_mood: true
+  field_narration: true
+  field_scenes: true
+  field_source_ref: true
+  field_synopsis: true
+  langcode: true

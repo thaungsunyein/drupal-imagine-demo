@@ -1,0 +1,101 @@
+uuid: 69eee847-1eb0-4fb9-ac02-a8218d7ddb63
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.chapter.body
+    - field.field.node.chapter.field_act
+    - field.field.node.chapter.field_book
+    - field.field.node.chapter.field_index
+    - field.field.node.chapter.field_mood
+    - field.field.node.chapter.field_narration
+    - field.field.node.chapter.field_scenes
+    - field.field.node.chapter.field_source_ref
+    - field.field.node.chapter.field_synopsis
+    - node.type.chapter
+  module:
+    - text
+    - user
+id: node.chapter.default
+targetEntityType: node
+bundle: chapter
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_act:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_book:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_index:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_mood:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_narration:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_scenes:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 109
+    region: content
+  field_source_ref:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_synopsis:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

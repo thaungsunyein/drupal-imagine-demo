@@ -1,0 +1,29 @@
+uuid: f5294ea8-9682-4bbc-8372-4bb7dcc33d5b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_narration
+    - media.type.audio
+    - node.type.chapter
+id: node.chapter.field_narration
+field_name: field_narration
+entity_type: node
+bundle: chapter
+label: Narration
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      audio: audio
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

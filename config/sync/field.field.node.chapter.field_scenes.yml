@@ -1,0 +1,29 @@
+uuid: a389546b-b2cd-4e89-9f0e-40317477ccdd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_scenes
+    - media.type.image
+    - node.type.chapter
+id: node.chapter.field_scenes
+field_name: field_scenes
+entity_type: node
+bundle: chapter
+label: Scenes
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

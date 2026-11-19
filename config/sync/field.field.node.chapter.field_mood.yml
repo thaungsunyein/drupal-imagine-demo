@@ -1,0 +1,19 @@
+uuid: c97f122a-b3fb-4ee0-be88-fd03d240b98d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mood
+    - node.type.chapter
+id: node.chapter.field_mood
+field_name: field_mood
+entity_type: node
+bundle: chapter
+label: Mood
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

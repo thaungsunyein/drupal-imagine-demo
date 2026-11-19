@@ -1,0 +1,19 @@
+uuid: 5e73815d-6b3a-4202-8ab9-eb5baba8ffd2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_act
+    - node.type.chapter
+id: node.chapter.field_act
+field_name: field_act
+entity_type: node
+bundle: chapter
+label: Act
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

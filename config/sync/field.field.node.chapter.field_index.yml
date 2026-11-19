@@ -1,0 +1,23 @@
+uuid: 21aa5ab1-f139-46af-b75c-0b33e586ecfe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_index
+    - node.type.chapter
+id: node.chapter.field_index
+field_name: field_index
+entity_type: node
+bundle: chapter
+label: Index
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

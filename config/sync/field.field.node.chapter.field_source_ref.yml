@@ -1,0 +1,19 @@
+uuid: f499ca63-9eb3-41cf-8ed8-300710e6cd0f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_source_ref
+    - node.type.chapter
+id: node.chapter.field_source_ref
+field_name: field_source_ref
+entity_type: node
+bundle: chapter
+label: 'Source Ref'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

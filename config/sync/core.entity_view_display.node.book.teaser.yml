@@ -1,0 +1,37 @@
+uuid: 796e14b4-b441-4e83-820a-051885afb791
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.book.field_author
+    - field.field.node.book.field_cover
+    - field.field.node.book.field_description
+    - field.field.node.book.field_first_published
+    - field.field.node.book.field_sdg_targets
+    - field.field.node.book.field_source_edition
+    - field.field.node.book.field_source_url
+    - field.field.node.book.field_translator
+    - node.type.book
+  module:
+    - user
+id: node.book.teaser
+targetEntityType: node
+bundle: book
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_author: true
+  field_cover: true
+  field_description: true
+  field_first_published: true
+  field_sdg_targets: true
+  field_source_edition: true
+  field_source_url: true
+  field_translator: true
+  langcode: true

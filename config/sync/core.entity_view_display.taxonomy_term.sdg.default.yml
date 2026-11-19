@@ -1,0 +1,31 @@
+uuid: 014cc31a-9a1f-4672-8de3-a2baf73c6b81
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.sdg.field_sdg_code
+    - taxonomy.vocabulary.sdg
+  module:
+    - text
+id: taxonomy_term.sdg.default
+targetEntityType: taxonomy_term
+bundle: sdg
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_sdg_code:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  langcode: true

@@ -1,0 +1,29 @@
+uuid: 8e1bd8c1-5087-4c28-b0e3-92c65dd289b4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sdg_targets
+    - node.type.book
+    - taxonomy.vocabulary.sdg
+id: node.book.field_sdg_targets
+field_name: field_sdg_targets
+entity_type: node
+bundle: book
+label: 'SDG Targets'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      sdg: sdg
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

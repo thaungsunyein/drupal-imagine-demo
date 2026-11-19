@@ -1,0 +1,22 @@
+uuid: 4342f36d-35cb-4075-85c5-fe6f773e9eb4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_synopsis
+    - node.type.chapter
+  module:
+    - text
+id: node.chapter.field_synopsis
+field_name: field_synopsis
+entity_type: node
+bundle: chapter
+label: Synopsis
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long
