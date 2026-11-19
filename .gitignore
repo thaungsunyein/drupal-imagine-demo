@@ -36,3 +36,5 @@
 .vscode/
 .phpunit.result.cache
 /.superpowers/
+/.editorconfig
+/.gitattributes
