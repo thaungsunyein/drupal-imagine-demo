@@ -36,6 +36,9 @@ param sshPublicKey string
 @description('Public IPv4 address allowed to reach SSH (22). Just the address, no CIDR suffix.')
 param sshSourceIp string
 
+@description('Sources allowed on 80/443. Empty = Internet. Set to the Cloudflare IPv4 ranges (https://www.cloudflare.com/ips-v4) once Cloudflare fronts the site.')
+param webSourcePrefixes array = []
+
 @description('Size of the data disk mounted at /var/lib/docker.')
 param dataDiskSizeGB int = 32
 
@@ -72,8 +75,8 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2024-05-01' = {
           destinationPortRange: '22'
         }
       }
-      // HTTP/HTTPS are open to the Internet until Cloudflare fronts the site;
-      // then these two rules get sourceAddressPrefixes = Cloudflare ranges (docs/deploy.md).
+      // HTTP/HTTPS: Internet until Cloudflare fronts the site, then only Cloudflare's ranges
+      // (webSourcePrefixes in main.parameters.json; see docs/deploy.md).
       {
         name: 'Allow-HTTP-Web'
         properties: {
@@ -81,7 +84,8 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2024-05-01' = {
           direction: 'Inbound'
           access: 'Allow'
           protocol: 'Tcp'
-          sourceAddressPrefix: 'Internet'
+          sourceAddressPrefix: empty(webSourcePrefixes) ? 'Internet' : null
+          sourceAddressPrefixes: empty(webSourcePrefixes) ? null : webSourcePrefixes
           sourcePortRange: '*'
           destinationAddressPrefix: '*'
           destinationPortRange: '80'
@@ -94,7 +98,8 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2024-05-01' = {
           direction: 'Inbound'
           access: 'Allow'
           protocol: 'Tcp'
-          sourceAddressPrefix: 'Internet'
+          sourceAddressPrefix: empty(webSourcePrefixes) ? 'Internet' : null
+          sourceAddressPrefixes: empty(webSourcePrefixes) ? null : webSourcePrefixes
           sourcePortRange: '*'
           destinationAddressPrefix: '*'
           destinationPortRange: '443'
