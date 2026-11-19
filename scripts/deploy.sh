@@ -66,6 +66,11 @@ else
   dc exec -T php drush config:set -y system.site uuid "$(sed -n 's/^uuid: //p' config/sync/system.site.yml)"
   dc exec -T php drush entity:delete shortcut -y
   dc exec -T php drush config:import -y
+  # A new site has no interface translations yet, and locale builds the FR/DE translations of
+  # core config from them, so without this they go missing. Fetch them, then import again.
+  dc exec -T php drush locale:check
+  dc exec -T php drush locale:update
+  dc exec -T php drush config:import -y
   MIGRATE=1
 fi
 if [ "$MIGRATE" = 1 ]; then
