@@ -241,25 +241,19 @@ These need the Cloudflare dashboard for `storyheroapp.com`, so Tom does them by 
    `(http.host eq "cms.storyheroapp.com" and http.request.uri.path eq "/user/login" and http.request.method eq "POST")`,
    5 requests per 10 seconds per IP, action **Block** for 10 seconds. The Free plan only offers the
    10-second period.
-6. **Tighten the NSG** once the site works through Cloudflare, so only Cloudflare can reach 80/443:
+6. **Tighten the NSG** once the site works through Cloudflare, so only Cloudflare can reach 80/443
+   (done on 2026-11-19):
    ```bash
-   CF_V4=$(curl -fsS https://www.cloudflare.com/ips-v4 | tr '\n' ' ')
+   for r in Allow-HTTP-Web Allow-HTTPS-Web; do curl -fsS https://www.cloudflare.com/ips-v4 | xargs az network nsg rule update -g rg-imagine-demo --nsg-name nsg-imagine-demo -n "$r" --source-address-prefix "" --source-address-prefixes; done
    ```
-   ```bash
-   az network nsg rule update -g rg-imagine-demo --nsg-name nsg-imagine-demo -n Allow-HTTP-Web --source-address-prefixes $CF_V4
-   ```
-   ```bash
-   az network nsg rule update -g rg-imagine-demo --nsg-name nsg-imagine-demo -n Allow-HTTPS-Web --source-address-prefixes $CF_V4
-   ```
-   `$CF_V4` is unquoted on purpose, so each range becomes its own argument. The VM has IPv4 only,
-   so the IPv6 ranges aren't needed. The current IPv4 list, as of 2026-11-19:
+   `xargs` passes each range as its own argument. That works in zsh, where an unquoted
+   `$VAR` is not split into words. The VM has IPv4 only, so the IPv6 ranges aren't needed. The
+   IPv4 list as of 2026-11-19:
    `173.245.48.0/20 103.21.244.0/22 103.22.200.0/22 103.31.4.0/22 141.101.64.0/18 108.162.192.0/18 190.93.240.0/20 188.114.96.0/20 197.234.240.0/22 198.41.128.0/17 162.158.0.0/15 104.16.0.0/13 104.24.0.0/14 172.64.0.0/13 131.0.72.0/22`.
    After this, `http://<ip>/` stops answering from your own network. That is expected.
-   Cloudflare changes these ranges rarely. When it does, re-run the two commands and update
-   `docker/nginx/prod/cloudflare-realip.conf`.
-
-   Note: re-running the Bicep deployment resets these two rules to `Internet`. Re-apply the
-   commands afterwards, or make the source prefixes a Bicep parameter first.
+   The same ranges are in `webSourcePrefixes` in `infra/main.parameters.json`, so re-running the
+   Bicep deployment keeps the restriction. Cloudflare changes these ranges rarely. When it does,
+   update that parameter, `docker/nginx/prod/cloudflare-realip.conf`, and re-run the command.
 
 ## Changing the SSH source IP
 
