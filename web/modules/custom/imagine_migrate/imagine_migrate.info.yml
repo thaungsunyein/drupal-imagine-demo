@@ -1,0 +1,11 @@
+name: Imagine migrate
+type: module
+description: 'Imports the Imagine classics (books, chapters, narration, artwork) from their JSON content folder.'
+package: Imagine
+core_version_requirement: ^10.3 || ^11
+dependencies:
+  - drupal:content_translation
+  - drupal:media
+  - drupal:migrate
+  - migrate_plus:migrate_plus
+  - migrate_tools:migrate_tools

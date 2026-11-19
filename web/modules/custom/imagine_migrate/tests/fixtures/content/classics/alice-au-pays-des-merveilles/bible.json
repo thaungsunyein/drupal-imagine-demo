@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "alice-au-pays-des-merveilles",
+  "title": "Aventures d'Alice au pays des merveilles",
+  "author": "Lewis Carroll",
+  "firstPublished": 1869,
+  "language": "fr",
+  "edition": {
+    "publicDomain": true,
+    "sourceEdition": "Henri Bué's 1869 translation, one of the two first into any language, as established by Project Gutenberg eBook #55456",
+    "sourceUrl": "https://www.gutenberg.org/ebooks/55456"
+  },
+  "positioning": {
+    "description": "Alice suit un lapin pressé hors d'un après-midi ennuyeux et entre dans un monde dont elle ne reconnaît aucune règle. Tous ceux qu'elle rencontre sont convaincus que c'est elle, l'étrange. Comprendre qui elle est se révèle le seul chemin du retour."
+  },
+  "sections": [
+    {
+      "index": 1,
+      "kind": "chapter",
+      "sourceRef": "Chapitre 1",
+      "editorialTitle": "Au fond du terrier",
+      "synopsis": "Une berge ennuyeuse, un lapin en gilet avec une montre de gousset, et une chute assez longue pour qu'on s'y ennuie. Alice atterrit dans une salle bordée de portes fermées à clef.",
+      "mood": "Curiosité",
+      "act": "Premier acte — La chute"
+    },
+    {
+      "index": 2,
+      "kind": "chapter",
+      "sourceRef": "Chapitre 2",
+      "editorialTitle": "La mare aux larmes",
+      "synopsis": "Alice change deux fois de taille, pleure une mare entière, puis doit la traverser à la nage aux côtés d'une souris que sa conversation offense.",
+      "mood": "Désarroi",
+      "act": "Premier acte — La chute"
+    }
+  ],
+  "translator": "Henri Bué",
+  "translationOf": "alice-in-wonderland",
+  "artworkFrom": "alice-in-wonderland",
+  "type": "novel"
+}

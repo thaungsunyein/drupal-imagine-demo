@@ -1,0 +1,28 @@
+{
+  "bookId": "alice-au-pays-des-merveilles",
+  "source": "Project Gutenberg #55456",
+  "chapters": [
+    {
+      "index": 1,
+      "ref": "CHAPITRE PREMIER.",
+      "label": "Chapitre 1",
+      "title": "AU FOND DU TERRIER",
+      "paragraphs": [
+        "Alice, assise auprès de sa sœur sur le gazon, commençait à s'ennuyer de rester là à ne rien faire; une ou deux fois elle avait jeté les yeux sur le livre que lisait sa sœur; mais quoi! pas d'images, pas de dialogues! \"La belle avance,\" pensait Alice, \"qu'un livre sans images, sans causeries!\".",
+        "Elle s'était mise à réfléchir, (tant bien que mal, car la chaleur du jour l'endormait et la rendait lourde,) se demandant si le plaisir de faire une couronne de marguerites valait bien la peine de se lever et de cueillir les fleurs, quand tout à coup un lapin blanc aux yeux roses passa près d'elle."
+      ],
+      "words": 2112
+    },
+    {
+      "index": 2,
+      "ref": "CHAPITRE II.",
+      "label": "Chapitre 2",
+      "title": "LA MARE AUX LARMES",
+      "paragraphs": [
+        "\"De plus très-curieux en plus très-curieux!\" s'écria Alice (sa surprise était si grande qu'elle ne pouvait s'exprimer correctement): \"Voilà que je m'allonge comme le plus grand télescope qui fût jamais! Adieu mes pieds!\" (Elle venait de baisser les yeux, et ses pieds lui semblaient s'éloigner à perte de vue.) \"Oh! mes pauvres petits pieds! Qui vous mettra vos bas et vos souliers maintenant, mes mignons? Quant à moi, je ne le pourrai certainement pas! Je serai bien trop loin pour m'occuper de vous: arrangez-vous du mieux que vous pourrez.--Il faut cependant que je sois bonne pour eux,\" pensa Alice, \"sans cela ils refuseront peut-être d'aller du côté que je voudrai. Ah! je sais ce que je ferai: je leur donnerai une belle paire de bottines à Noël.\"",
+        "Puis elle chercha dans son esprit comment elle s'y prendrait. \"Il faudra les envoyer par le messager,\" pensa-t-elle; \"quelle étrange chose d'envoyer des présents à ses pieds! Et l'adresse donc! C'est cela qui sera drôle."
+      ],
+      "words": 1998
+    }
+  ]
+}

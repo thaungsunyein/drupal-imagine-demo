@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "alice-in-wonderland",
+  "title": "Alice's Adventures in Wonderland",
+  "author": "Lewis Carroll",
+  "firstPublished": 1865,
+  "language": "en",
+  "edition": {
+    "publicDomain": true,
+    "sourceEdition": "Macmillan, 1866 text as established by Project Gutenberg eBook #11",
+    "sourceUrl": "https://www.gutenberg.org/ebooks/11"
+  },
+  "positioning": {
+    "description": "Alice follows a hurrying rabbit out of a dull afternoon and into a world with no rules she recognises. Everyone she meets is certain she is the strange one. Working out who she is turns out to be the only way home."
+  },
+  "sections": [
+    {
+      "index": 1,
+      "kind": "chapter",
+      "sourceRef": "Chapter I",
+      "editorialTitle": "Down the Rabbit-Hole",
+      "synopsis": "A dull riverbank, a rabbit with a waistcoat and a pocket watch, and a fall that goes on long enough to get bored in. Alice lands in a hall of locked doors.",
+      "mood": "Curiosity",
+      "act": "Act I — Falling"
+    },
+    {
+      "index": 2,
+      "kind": "chapter",
+      "sourceRef": "Chapter II",
+      "editorialTitle": "The Pool of Tears",
+      "synopsis": "Alice changes size twice, cries a pool, and then has to swim it alongside a mouse who objects to her conversation.",
+      "mood": "Bewilderment",
+      "act": "Act I — Falling"
+    }
+  ],
+  "type": "novel"
+}
