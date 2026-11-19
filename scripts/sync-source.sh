@@ -19,14 +19,16 @@ paths=()
 for b in "${BOOKS[@]}"; do
   [ -d "$CONTENT_DIR/classics/$b" ] || die "missing $CONTENT_DIR/classics/$b"
   [ -f "$CONTENT_DIR/text/$b.json" ] || die "missing $CONTENT_DIR/text/$b.json"
-  # "/./" tells rsync --relative to keep the path from there on.
-  paths+=("$CONTENT_DIR/./classics/$b" "$CONTENT_DIR/./text/$b.json")
+  paths+=("classics/$b" "text/$b.json")
 done
 
 need_vm
 echo "Syncing ${#BOOKS[@]} books from $CONTENT_DIR to $VM_HOST:$SOURCE_DIR_REMOTE"
-rsync -az --relative --delete --human-readable --info=stats1 \
-  --chmod=D755,F644 --exclude=.DS_Store \
+# Relative paths from inside CONTENT_DIR + --relative keep classics/ and text/ (works with
+# GNU rsync and macOS openrsync alike).
+cd "$CONTENT_DIR"
+rsync -az --relative --delete --stats \
+  --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r --exclude=.DS_Store \
   -e "ssh $(printf '%q ' "${SSH_OPTS[@]}")" \
   "${paths[@]}" "$VM_USER@$VM_HOST:$SOURCE_DIR_REMOTE/"
 vm_ssh "du -sh $SOURCE_DIR_REMOTE; ls $SOURCE_DIR_REMOTE/classics $SOURCE_DIR_REMOTE/text"

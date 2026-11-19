@@ -12,7 +12,7 @@
       "value": "imagine-demo"
     },
     "vmSize": {
-      "value": "Standard_B2als_v2"
+      "value": "Standard_D2als_v6"
     },
     "adminUsername": {
       "value": "azureuser"

@@ -13,11 +13,14 @@ backups: VM ──azcopy + short-lived SAS──▶ Storage account / backups co
 ## What exists in Azure
 
 Everything is defined in [`infra/main.bicep`](../infra/main.bicep) and lives in subscription
-`0cb51b3b-7cba-43f1-9997-7c2cc91721da`, resource group `rg-imagine-demo` (switzerlandnorth).
+`0cb51b3b-7cba-43f1-9997-7c2cc91721da`, resource group `rg-imagine-demo`. The VM and its network are in **swedencentral**; the backups
+storage is in **switzerlandnorth** (see [Why Sweden Central and D2als_v6](#why-sweden-central-and-d2als_v6)).
+
+VM public IP: **20.240.50.42** (static).
 
 | Resource | Name | Notes |
 |---|---|---|
-| VM | `vm-imagine-demo` | Standard_B2s (2 vCPU, 4 GB), Ubuntu 24.04 LTS Gen2, Trusted Launch, SSH key only, user `azureuser` |
+| VM | `vm-imagine-demo` | Standard_D2als_v6 (2 vCPU, 4 GB, AMD, NVMe disks), Ubuntu 24.04 LTS Gen2, Trusted Launch, SSH key only, user `azureuser` |
 | OS disk | `osdisk-imagine-demo` | 30 GB StandardSSD_LRS |
 | Data disk | `datadisk-imagine-demo-docker` | 32 GB StandardSSD_LRS, ext4, mounted at `/var/lib/docker` (images, containers, DB and files volumes) |
 | Public IP | `pip-imagine-demo` | Standard, static |
@@ -34,7 +37,8 @@ apt repo, installs azcopy from Microsoft's repo, adds `azureuser` to the `docker
 unattended-upgrades, and creates `/srv/drupal-imagine-demo`, `/srv/imagine-source`, `/srv/backups`
 and `/etc/imagine/tls`.
 
-Expected cost: about $35/month (B2s, two SSD disks, static IP, a few GB of Cool blobs).
+Expected cost: about $75/month while on D2als_v6 (VM about $63, plus two SSD disks, static IP and a
+few GB of Cool blobs). Switching to B2als_v2 brings it to about $40.
 
 ### Creating or updating it
 
@@ -52,41 +56,33 @@ Then run the same command with `az deployment group create` instead of `what-if`
 safe and also the way to change the SSH source IP when yours changes. The deployment outputs give
 the public IP, the ssh command and the storage account name.
 
-### Status on 2026-11-19: storage deployed, VM pending
+### Why Sweden Central and D2als_v6
 
-On 2026-11-19 only the network and storage are deployed (`-p deployVm=false`). The storage
-account is `stimaginedemoscupwphj5cb`. Azure would not create a VM on this subscription:
+On 2026-11-19 Azure would not give this subscription a budget VM in Switzerland North:
 
-- **`SkuNotAvailable` (Capacity Restrictions):** Standard_B2s, plus B2ms, D2as_v4, D2als_v6,
-  D2pls_v6 and A2_v2 in switzerlandnorth (every zone). B2s is refused the same way in
-  germanywestcentral, northeurope, swedencentral, francecentral and uksouth. westeurope isn't
-  accepting new customers at all.
-- **Bv2 sizes:** B2als_v2, B2as_v2 and B2s_v2 are unrestricted in swedencentral, italynorth and
-  polandcentral, but the subscription has **0 vCPU quota** for the Basv2/Bsv2 families
-  (`QuotaExceeded`).
+- **`SkuNotAvailable` (Capacity Restrictions):** Standard_B2s in every EU region tried (all zones).
+- **`QuotaExceeded`:** the newer B-series v2 sizes (B2als_v2 and similar), because Basv2/Bsv2
+  quota is 0. A quota increase to 2 vCPUs was refused automatically for both Switzerland North
+  and Sweden Central ("high demand").
 
-The fix is a portal request: Help + support > Create a support request > Service and subscription
-limits (quotas) > Compute-VM (cores-vCPUs). Ask for access to Standard_B2s / BS family in
-Switzerland North. As a faster alternative, ask for 2 vCPUs of Basv2 quota in Switzerland North
-or Sweden Central. Basv2 increases are often approved automatically on the portal's Quotas page.
+Standard_D2als_v6 had both capacity and quota in Sweden Central, so the VM runs there. The
+storage was already in Switzerland North and stays there (`location` vs `vmLocation`
+parameters), so backups cross regions.
 
-Once approved, add the VM with one command. `location` and `vmSize` are parameters. A VM in another
-region still works with the switzerlandnorth storage, since backups simply cross regions:
+**Downsizing later.** Once a support request for 2 vCPUs of Basv2 in Sweden Central is approved,
+resize in place. The IP, disks and data are kept, with a few minutes of downtime:
 
 ```bash
-az deployment group create -g rg-imagine-demo -f infra/main.bicep -p infra/main.parameters.json \
-  -p location=switzerlandnorth vmSize=Standard_B2s \
-     sshSourceIp="$(curl -s https://api.ipify.org)" sshPublicKey="$(cat ~/.ssh/imagine_demo.pub)" \
-     backupOperatorPrincipalId="$(az ad signed-in-user show --query id -o tsv)"
+az vm deallocate -g rg-imagine-demo -n vm-imagine-demo
 ```
 
-Caveat: `location` applies to every resource in the template. To put the VM in another region,
-first delete the empty `vnet-imagine-demo` and `nsg-imagine-demo` (a NIC must be in its VNet's
-region). Leave the storage account alone: Azure refuses to move it, and the deployment fails with
-an error rather than changing anything. The easiest route is to keep switzerlandnorth. You can also
-try a single zone with `-p zone=1|2|3`.
+```bash
+az vm resize -g rg-imagine-demo -n vm-imagine-demo --size Standard_B2als_v2 && az vm start -g rg-imagine-demo -n vm-imagine-demo
+```
 
-Then run `scripts/init-env.sh` and `scripts/sync-source.sh`.
+Then set `vmSize` to `Standard_B2als_v2` in `infra/main.parameters.json`. B-series v2 uses SCSI
+disks instead of NVMe, and the mount uses the filesystem UUID, so `/var/lib/docker` mounts either
+way. Run `df -h /var/lib/docker` after the restart to confirm.
 
 First boot takes 3-5 minutes. Check it with:
 
