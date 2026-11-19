@@ -20,14 +20,24 @@ targetEntityType: node
 bundle: book
 mode: teaser
 content:
-  links:
-    settings: {  }
+  field_author:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    weight: 100
+    weight: 1
+    region: content
+  field_cover:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
-  field_author: true
-  field_cover: true
   field_description: true
   field_first_published: true
   field_sdg_targets: true
@@ -35,3 +45,4 @@ hidden:
   field_source_url: true
   field_translator: true
   langcode: true
+  links: true

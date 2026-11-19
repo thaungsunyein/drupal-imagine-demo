@@ -1,0 +1,32 @@
+uuid: 5207e80f-6cd2-4eb5-85ae-845a94a4073c
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.book_chapters
+  module:
+    - node
+    - views
+  theme:
+    - olivero
+id: olivero_book_chapters
+theme: olivero
+region: content
+weight: 10
+provider: null
+plugin: 'views_block:book_chapters-block_1'
+settings:
+  id: 'views_block:book_chapters-block_1'
+  label: ''
+  label_display: visible
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      book: book
