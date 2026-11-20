@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY php.ini /usr/local/etc/php/conf.d/zz-drupal.ini
+COPY mariadb-client.cnf /etc/mysql/conf.d/zz-drupal-client.cnf
 
 WORKDIR /var/www/html
 # Lets you type `drush` instead of `vendor/bin/drush`.

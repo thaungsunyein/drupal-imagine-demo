@@ -1,0 +1,9 @@
+# Drush writes its own --defaults-file for the database client, so the client never reads
+# /etc/mysql (see docker/php/mariadb-client.cnf). Turn TLS off here too: the Debian 13
+# mariadb/mariadb-dump client requires it by default, and the MariaDB 10.11 container on the
+# private Docker network has none. Without this, sql:query, sql:cli and sql:dump (backups) fail.
+command:
+  sql:
+    options:
+      extra: '--skip-ssl'
+      extra-dump: '--skip-ssl'

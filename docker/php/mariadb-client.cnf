@@ -1,0 +1,5 @@
+# The mariadb / mariadb-dump client on Debian 13 requires TLS by default. The database
+# is the MariaDB 10.11 container on the private Docker network, which has no TLS, so drush
+# sql:* (and the backups that use sql-dump) would fail with "SSL is required".
+[client]
+skip-ssl
